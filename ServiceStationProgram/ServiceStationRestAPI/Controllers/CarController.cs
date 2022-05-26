@@ -17,15 +17,15 @@ namespace ServiceStationRestAPI.Controllers
         }
 
         [HttpGet]
-        public List<CarViewModel> GetClientList() => _carLogic.Read(null)?.ToList();
+        public List<CarViewModel> GetCarList() => _carLogic.Read(null)?.ToList();
 
         [HttpGet]
         public CarViewModel GetCar(int carId) => _carLogic.Read(new CarBindingModel { Id = carId })?[0];
 
         [HttpPost]
-        public void CreateOrUpdateClient(CarBindingModel model) => _carLogic.CreateOrUpdate(model);
+        public void CreateOrUpdateCar(CarBindingModel model) => _carLogic.CreateOrUpdate(model);
 
         [HttpPost]
-        public void DeleteClient(CarBindingModel model) => _carLogic.Delete(model);
+        public void DeleteCar(CarBindingModel model) => _carLogic.Delete(model);
     }
 }

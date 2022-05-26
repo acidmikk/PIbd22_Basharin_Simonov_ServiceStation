@@ -10,31 +10,30 @@ namespace ServiceStationRestAPI.Controllers
     public class DefectController : ControllerBase
     {
         private readonly IDefectLogic _defectLogic;
-        private readonly ILoanProgramLogic _loanProgramLogic;
+        private readonly ICarLogic _carLogic;
 
-        public DefectController(IDefectLogic defectLogic, ILoanProgramLogic loanProgramLogic)
+        public DefectController(IDefectLogic defectLogic, ICarLogic carLogic)
         {
             _defectLogic = defectLogic;
-            _loanProgramLogic = loanProgramLogic;
+            _carLogic = carLogic;
         }
 
         [HttpGet]
-        public List<ClientViewModel> GetClientList() => _defectLogic.Read(null)?.ToList();
+        public List<DefectViewModel> GetDefectList() => _defectLogic.Read(null)?.ToList();
 
         [HttpGet]
-        public List<LoanProgramViewModel> GetLoanProgramList() => _loanProgramLogic.Read(null)?.ToList();
+        public List<CarViewModel> GetCars() => _carLogic.Read(null)?.ToList();
 
         [HttpGet]
-        public LoanProgramViewModel GetLoanProgram(int loanProgramId) => _loanProgramLogic.Read(new LoanProgramBindingModel { Id = loanProgramId })?[0];
+        public CarViewModel GetCar(int carId) => _carLogic.Read(new CarBindingModel { Id = carId })?[0];
 
         [HttpGet]
-        public ClientViewModel GetClient(int clientId) => _defectLogic.Read(new ClientBindingModel { Id = clientId })?[0];
+        public DefectViewModel GetDefect(int defectId) => _defectLogic.Read(new DefectBindingModel { Id = defectId })?[0];
 
         [HttpPost]
-        public void CreateOrUpdateClient(ClientBindingModel model) => _defectLogic.CreateOrUpdate(model);
+        public void CreateOrUpdateDefect(DefectBindingModel model) => _defectLogic.CreateOrUpdate(model);
 
         [HttpPost]
-        public void DeleteClient(ClientBindingModel model) => _defectLogic.Delete(model);
+        public void DeleteDefect(DefectBindingModel model) => _defectLogic.Delete(model);
     }
-}
 }
