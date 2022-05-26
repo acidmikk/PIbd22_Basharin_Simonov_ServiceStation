@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStationBusinessLogic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStationDatabaseImplement", "ServiceStationDatabaseImplement\ServiceStationDatabaseImplement.csproj", "{18E49806-67AC-462C-89D5-E6DB00ABDD11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStationViewMaster", "ServiceStationViewMaster\ServiceStationViewMaster.csproj", "{08931D11-F26E-4CA0-BB51-443C780AE1EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStationViewMaster", "ServiceStationViewMaster\ServiceStationViewMaster.csproj", "{08931D11-F26E-4CA0-BB51-443C780AE1EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStationRestAPI", "ServiceStationRestAPI\ServiceStationRestAPI.csproj", "{B403A03C-C1F4-4D89-B4B0-135ADD3F3218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{08931D11-F26E-4CA0-BB51-443C780AE1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08931D11-F26E-4CA0-BB51-443C780AE1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08931D11-F26E-4CA0-BB51-443C780AE1EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B403A03C-C1F4-4D89-B4B0-135ADD3F3218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B403A03C-C1F4-4D89-B4B0-135ADD3F3218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B403A03C-C1F4-4D89-B4B0-135ADD3F3218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B403A03C-C1F4-4D89-B4B0-135ADD3F3218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
