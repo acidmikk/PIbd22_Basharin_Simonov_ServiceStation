@@ -17,4 +17,8 @@
     <ProjectReference Include="..\ServiceStationDatabaseImplement\ServiceStationDatabaseImplement.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
 </Project>

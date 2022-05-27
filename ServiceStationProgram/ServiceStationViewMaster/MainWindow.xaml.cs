@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
 
 namespace ServiceStationViewMaster
 {
@@ -22,6 +23,37 @@ namespace ServiceStationViewMaster
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void menuItemSpares_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuItemRepair_Click(object sender, RoutedEventArgs e)
+        {
+            var form = App.Container.Resolve<RepairsWindow>();
+            form.ShowDialog();
+        }
+
+        private void menuItemWork_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuItemGetList_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuItemReport_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void menuItemBindCurrency_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

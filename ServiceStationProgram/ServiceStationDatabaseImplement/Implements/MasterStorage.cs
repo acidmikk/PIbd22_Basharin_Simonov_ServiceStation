@@ -11,7 +11,7 @@ using ServiceStationDatabaseImplement.Models;
 
 namespace ServiceStationDatabaseImplement.Implements
 {
-    public class MasterStorage
+    public class MasterStorage : IMasterStorage
     {
         public void Delete(MasterBindingModel model)
         {
@@ -118,4 +118,4 @@ namespace ServiceStationDatabaseImplement.Implements
         }
     }
 }
-}
+

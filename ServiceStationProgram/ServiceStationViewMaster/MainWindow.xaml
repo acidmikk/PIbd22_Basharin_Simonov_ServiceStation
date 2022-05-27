@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServiceStationViewMaster"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        FontFamily="Rubik"
+        Title="Главная" Height="450" Width="800"
+        UseLayoutRounding="True">
     <Grid>
-        
+        <Image Width="300">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="300" UriSource="Resources\serviceLogo.png" />
+            </Image.Source>
+        </Image>
+
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Center"  FontFamily="Rubik" FontWeight="UltraLight" Height="40" Width="800" FontSize="16" BorderBrush="LightBlue" BorderThickness="2" Background="#EBB9A2">
+            <MenuItem x:Name="menuItemSpares" Header="Запчасти" Height="39" Click="menuItemSpares_Click" BorderThickness="0" BorderBrush="Black" Background="#EBB9A2"/>
+            <MenuItem x:Name="menuItemRepair" Header="Ремонты" Click="menuItemRepair_Click"  BorderThickness="0" BorderBrush="Black" Background="#EBB9A2" />
+            <MenuItem x:Name="menuItemWork" Header="Работы" Click="menuItemWork_Click"  BorderThickness="0" BorderBrush="Black" Background="#EBB9A2"/>
+            <MenuItem x:Name="menuItemGetList" Header="Получение списка" Click="menuItemGetList_Click"  BorderThickness="0" BorderBrush="Black" Background="#EBB9A2"/>
+            <MenuItem x:Name="menuItemReport" Header="Отчёт" Click="menuItemReport_Click" BorderThickness="0" BorderBrush="Black" Background="#EBB9A2" />
+            <MenuItem x:Name="menuItemBindCurrency" Header="Привязать валюту" Click="menuItemBindCurrency_Click" BorderThickness="0" BorderBrush="Black" Background="#EBB9A2" />
+        </Menu>
+
     </Grid>
 </Window>

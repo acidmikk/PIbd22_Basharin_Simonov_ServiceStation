@@ -12,5 +12,6 @@ namespace ServiceStationContracts.ViewModels
         public int Id { get; set; }
         [DisplayName("Наименование ремонта")]
         public string Name { get; set; }
+
     }
 }
