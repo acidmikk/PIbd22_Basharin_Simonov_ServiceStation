@@ -73,7 +73,7 @@ namespace ServiceStationApp.Controllers
                 Program.Inspector = APIInspector.GetRequest<InspectorViewModel>($"api/inspector/login?login={login}&password={password}");
                 if (Program.Inspector == null)
                 {
-                    throw new Exception("Неверный логин/пароль");
+                    throw new Exception("Неверный логин или пароль");
                 }
                 Response.Redirect("Index");
                 return;
@@ -92,7 +92,7 @@ namespace ServiceStationApp.Controllers
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(fio))
             {
-                APIInspector.PostRequest("api/clerk/register", new InspectorBindingModel
+                APIInspector.PostRequest("api/inspector/register", new InspectorBindingModel
                 {
                     InspectorFIO = fio,
                     Email = login,
