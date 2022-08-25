@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServiceStationContracts.BindingModels;
+using ServiceStationContracts.BusinessLogicsContracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ServiceStationBusinessLogic.BusinessLogics
 {
-    public class ReportLogic
-    {
+    public class ReportLogic : IReportLogic
+    {       
     }
 }

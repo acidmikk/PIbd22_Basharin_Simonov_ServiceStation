@@ -10,7 +10,7 @@ namespace ServiceStationBusinessLogic.OfficePackage
 {
     public abstract class AbstractSaveToExcel
     {
-        public void CreateReportManager(ExcelInfo info)
+        /*public void CreateReportManager(ExcelInfo info)
         {
             CreateExcel(info);
             InsertCellInWorksheet(new ExcelCellParameters
@@ -120,5 +120,6 @@ namespace ServiceStationBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SaveExcel(ExcelInfo info);
+        */
     }
 }

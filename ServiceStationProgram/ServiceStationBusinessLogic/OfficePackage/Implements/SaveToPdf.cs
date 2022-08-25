@@ -13,6 +13,7 @@ namespace ServiceStationBusinessLogic.OfficePackage.Implements
 {
     public class SaveToPdf : AbstractSaveToPdf
     {
+        /*
         private Document _document;
         private Section _section;
         private Table _table;
@@ -87,5 +88,6 @@ namespace ServiceStationBusinessLogic.OfficePackage.Implements
             renderer.RenderDocument();
             renderer.PdfDocument.Save(info.FileName);
         }
+        */
     }
 }

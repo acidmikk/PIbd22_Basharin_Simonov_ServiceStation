@@ -10,6 +10,7 @@ namespace ServiceStationBusinessLogic.OfficePackage
 {
     public abstract class AbstractSaveToWord
     {
+        /*
         public void CreateDocManager(WordInfo info)
         {
 
@@ -105,5 +106,6 @@ namespace ServiceStationBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SaveWord(WordInfo info);
+        */
     }
 }

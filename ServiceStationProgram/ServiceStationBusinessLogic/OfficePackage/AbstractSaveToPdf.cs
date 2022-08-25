@@ -10,6 +10,7 @@ namespace ServiceStationBusinessLogic.OfficePackage
 {
     public abstract class AbstractSaveToPdf
     {
+        /*
         public void CreateDocManager(PdfInfo info)
         {
             CreatePdf(info);
@@ -126,6 +127,7 @@ namespace ServiceStationBusinessLogic.OfficePackage
         /// </summary>
         /// <param name="info"></param>
         protected abstract void SavePdf(PdfInfo info);
+        */
     }
 }
 

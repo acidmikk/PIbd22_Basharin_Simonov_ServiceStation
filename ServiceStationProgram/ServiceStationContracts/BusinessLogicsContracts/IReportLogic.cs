@@ -10,6 +10,7 @@ namespace ServiceStationContracts.BusinessLogicsContracts
 {
     public interface IReportLogic
     {
+        /*
         //Clerk
 
         // Получение списка валют по выбранным клиентам
@@ -40,6 +41,7 @@ namespace ServiceStationContracts.BusinessLogicsContracts
 
         void SaveCurrenciesToPdfFile(ReportBindingModel model);
         void SaveClientsToPdfFile(ReportBindingModel model);
-    }
+        */
+    }    
 }
-}
+

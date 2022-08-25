@@ -14,7 +14,7 @@ namespace ServiceStationApp.Controllers
         {
             _logger = logger;
         }
-
+        
         public IActionResult Index()
         {
             if (Program.Inspector == null)
@@ -37,7 +37,7 @@ namespace ServiceStationApp.Controllers
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(fio))
             {
-                APIInspector.PostRequest("api/nnspector/updatedata", new InspectorBindingModel
+                APIInspector.PostRequest("api/inspector/updatedata", new InspectorBindingModel
                 {
                     Id = Program.Inspector.Id,
                     InspectorFIO = fio,
@@ -104,7 +104,7 @@ namespace ServiceStationApp.Controllers
             throw new Exception("Введите логин, пароль и ФИО");
         }
 
-        public IActionResult Defect()
+        /*public IActionResult Defect()
         {
             if (Program.Inspector == null)
             {
@@ -368,5 +368,6 @@ namespace ServiceStationApp.Controllers
             }
             throw new Exception("Выберите вклад и клиентов");
         }
+        */
     }
 }

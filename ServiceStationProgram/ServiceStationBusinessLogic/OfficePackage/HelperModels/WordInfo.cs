@@ -11,7 +11,7 @@ namespace ServiceStationBusinessLogic.OfficePackage.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public List<ReportClientCurrencyViewModel> ClientCurrency { get; set; }
-        public List<ReportLoanProgramDepositViewModel> LoanProgramDeposit { get; set; }
+        //public List<ReportClientCurrencyViewModel> ClientCurrency { get; set; }
+        //public List<ReportLoanProgramDepositViewModel> LoanProgramDeposit { get; set; }
     }
 }

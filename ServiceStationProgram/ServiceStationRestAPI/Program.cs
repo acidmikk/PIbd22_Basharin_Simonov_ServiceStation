@@ -20,7 +20,7 @@ namespace ServiceStationRestAPI
         Host.CreateDefaultBuilder(args)
         .ConfigureWebHostDefaults(webBuilder =>
         {
-            webBuilder.UseStartup<StartUp>();
+            webBuilder.UseStartup<Startup>();
         });
     }
 }

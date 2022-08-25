@@ -16,7 +16,7 @@ namespace ServiceStationRestAPI.Controllers
             _reportLogic = reportLogic;
             _carLogic = carLogic;
         }
-
+        /*
         [HttpPost]
         public void CreateReportClientCurrencyToWordFile(ReportBindingModel model) => _reportLogic.SaveClientCurrencyToWordFile(model);
 
@@ -28,6 +28,6 @@ namespace ServiceStationRestAPI.Controllers
 
         [HttpGet]
         public List<ReportClientsViewModel> GetClientsReport(string dateFrom, string dateTo) => _reportLogic.GetClients(new ReportBindingModel { DateFrom = Convert.ToDateTime(dateFrom), DateTo = Convert.ToDateTime(dateTo) });
+    */
     }
-}
 }

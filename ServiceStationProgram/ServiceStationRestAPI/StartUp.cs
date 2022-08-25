@@ -3,8 +3,8 @@ using ServiceStationBusinessLogic.OfficePackage;
 using ServiceStationBusinessLogic.OfficePackage.Implements;
 using ServiceStationContracts.BusinessLogicsContracts;
 using ServiceStationContracts.StoragesContracts;
-using ServiceStationDatabaseImplement.Implements;
 using Microsoft.OpenApi.Models;
+using ServiceStationDatabaseImplement.Implements;
 
 namespace ServiceStationRestAPI
 {
@@ -17,23 +17,23 @@ namespace ServiceStationRestAPI
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IClientStorage, ClientStorage>();
-            services.AddTransient<IClerkStorage, ClerkStorage>();
-            services.AddTransient<ICurrencyStorage, CurrencyStorage>();
-            services.AddTransient<IDepositStorage, DepositStorage>();
-            services.AddTransient<ILoanProgramStorage, LoanProgramStorage>();
-            services.AddTransient<IManagerStorage, ManagerStorage>();
-            services.AddTransient<IReplenishmentStorage, ReplenishmentStorage>();
-            services.AddTransient<ITermStorage, TermStorage>();
+            services.AddTransient<ICarStorage, CarStorage>();
+            services.AddTransient<IDefectStorage, DefectStorage>();
+            services.AddTransient<IInspectorStorage, InspectorStorage>();
+            services.AddTransient<IRepairStorage, RepairStorage>();
+            services.AddTransient<ISparesStorage, SparesStorage>();
+            services.AddTransient<ITechnicalMaintenanceStorage, TechnicalMaintenanceStorage>();
+            services.AddTransient<IWorkStorage, WorkStorage>();
+            services.AddTransient<IMasterStorage, MasterStorage>();
 
-            services.AddTransient<IClientLogic, ClientLogic>();
-            services.AddTransient<IClerkLogic, ClerkLogic>();
-            services.AddTransient<ICurrencyLogic, CurrencyLogic>();
-            services.AddTransient<IDepositLogic, DepositLogic>();
-            services.AddTransient<ILoanProgramLogic, LoanProgramLogic>();
-            services.AddTransient<IManagerLogic, ManagerLogic>();
-            services.AddTransient<IReplenishmentLogic, ReplenishmentLogic>();
-            services.AddTransient<ITermLogic, TermLogic>();
+            services.AddTransient<ICarLogic, CarLogic>();
+            services.AddTransient<IDefectLogic, DefectLogic>();
+            services.AddTransient<IInspectorLogic, InspectorLogic>();
+            services.AddTransient<IRepairLogic, RepairLogic>();
+            services.AddTransient<ISparesLogic, SparesLogic>();
+            services.AddTransient<ITechnicalMaintenanceLogic, TechnicalMaintenanceLogic>();
+            services.AddTransient<IMasterLogic, MasterLogic>();
+            services.AddTransient<IWorkLogic, WorkLogic>();
             services.AddTransient<IReportLogic, ReportLogic>();
             services.AddTransient<AbstractSaveToWord, SaveToWord>();
             services.AddTransient<AbstractSaveToExcel, SaveToExcel>();

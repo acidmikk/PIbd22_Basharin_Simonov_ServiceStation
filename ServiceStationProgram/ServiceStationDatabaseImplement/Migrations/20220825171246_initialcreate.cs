@@ -1,11 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
-
 namespace ServiceStationDatabaseImplement.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -136,13 +134,13 @@ namespace ServiceStationDatabaseImplement.Migrations
                         column: x => x.InspectorId,
                         principalTable: "Inspectors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Cars_TechnicalMaintenances_TechnicalMaintenanceId",
                         column: x => x.TechnicalMaintenanceId,
                         principalTable: "TechnicalMaintenances",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -170,13 +168,13 @@ namespace ServiceStationDatabaseImplement.Migrations
                         column: x => x.MasterId,
                         principalTable: "Masters",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Spares_Repairs_RepairId",
                         column: x => x.RepairId,
                         principalTable: "Repairs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -204,7 +202,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         column: x => x.SparesId,
                         principalTable: "Spares",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Works_TechnicalMaintenances_TechnicalMaintenanceId",
                         column: x => x.TechnicalMaintenanceId,

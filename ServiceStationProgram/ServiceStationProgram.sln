@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStationDatabaseImple
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStationViewMaster", "ServiceStationViewMaster\ServiceStationViewMaster.csproj", "{08931D11-F26E-4CA0-BB51-443C780AE1EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStationRestAPI", "ServiceStationRestAPI\ServiceStationRestAPI.csproj", "{B403A03C-C1F4-4D89-B4B0-135ADD3F3218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStationRestAPI", "ServiceStationRestAPI\ServiceStationRestAPI.csproj", "{B403A03C-C1F4-4D89-B4B0-135ADD3F3218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceStationApp", "ServiceStationApp\ServiceStationApp.csproj", "{D0BBF01B-2C7E-4BE7-AE62-D2BDC952E1AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceStationApp", "ServiceStationApp\ServiceStationApp.csproj", "{D0BBF01B-2C7E-4BE7-AE62-D2BDC952E1AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
