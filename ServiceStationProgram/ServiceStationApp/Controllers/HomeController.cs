@@ -24,15 +24,17 @@ namespace ServiceStationApp.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             if (Program.Inspector == null)
             {
                 return Redirect("~/Home/Enter");
             }
-            return View();
+            return View(Program.Inspector);
         }
 
+        [HttpPost]
         public void Privacy(string login, string password, string fio)
         {
             if (!string.IsNullOrEmpty(login) && !string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(fio))
@@ -103,6 +105,8 @@ namespace ServiceStationApp.Controllers
             }
             throw new Exception("Введите логин, пароль и ФИО");
         }
+
+
 
         /*public IActionResult Defect()
         {

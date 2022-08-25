@@ -100,14 +100,23 @@ namespace ServiceStationDatabaseImplement.Implements
         public void Update(InspectorBindingModel model)
         {
             using var context = new ServiceStationDatabase();
-
-            var element = context.Inspectors.FirstOrDefault(rec => rec.Id == model.Id);
-            if (element == null)
+            using var transaction = context.Database.BeginTransaction();
+            try
             {
-                throw new Exception("Руководитель не найден");
+                var element = context.Inspectors.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element == null)
+                {
+                    throw new Exception("Руководитель не найден");
+                }
+                CreateModel(model, element);
+                context.SaveChanges();
+                transaction.Commit();
             }
-            CreateModel(model, element);
-            context.SaveChanges();
+            catch
+            {
+                transaction.Rollback();
+                throw;
+            }
         }
         private Inspector CreateModel(InspectorBindingModel model, Inspector inspector)
         {
