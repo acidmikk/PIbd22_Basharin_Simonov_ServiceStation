@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceStationDatabaseImplement;
 
 namespace ServiceStationDatabaseImplement.Migrations
 {
     [DbContext(typeof(ServiceStationDatabase))]
-    partial class ServiceStationDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20220825194028_carFields2")]
+    partial class carFields2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,6 +35,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("DefectId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Discription")
@@ -47,6 +50,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("TechnicalMaintenanceId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -250,7 +254,9 @@ namespace ServiceStationDatabaseImplement.Migrations
                 {
                     b.HasOne("ServiceStationDatabaseImplement.Models.Defect", "Defect")
                         .WithMany("Cars")
-                        .HasForeignKey("DefectId");
+                        .HasForeignKey("DefectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ServiceStationDatabaseImplement.Models.Inspector", "Inspector")
                         .WithMany("Cars")
@@ -260,7 +266,9 @@ namespace ServiceStationDatabaseImplement.Migrations
 
                     b.HasOne("ServiceStationDatabaseImplement.Models.TechnicalMaintenance", "TechnicalMaintenance")
                         .WithMany("Cars")
-                        .HasForeignKey("TechnicalMaintenanceId");
+                        .HasForeignKey("TechnicalMaintenanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Defect");
 

@@ -42,7 +42,7 @@ namespace ServiceStationRestAPI.Controllers
         public List<DefectViewModel> GetInspectorDefectList(int inspectorId) => _defectLogic.Read(new DefectBindingModel { InspectorId = inspectorId });
 
         [HttpGet]
-        public List<CarViewModel> GetClerkCarList(int inspectorId) => _carLogic.Read(new CarBindingModel { InspectorId = inspectorId });
+        public List<CarViewModel> GetInspectorCarList(int inspectorId) => _carLogic.Read(new CarBindingModel { InspectorId = inspectorId });
 
         [HttpGet]
         public List<TechnicalMaintenanceViewModel> GetInsppectorTechnicalMaintenanceList(int inspectorId) => 

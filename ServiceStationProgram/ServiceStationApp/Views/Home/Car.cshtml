@@ -1,0 +1,87 @@
+﻿@using ServiceStationContracts.ViewModels
+
+@model List<CarViewModel>
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Автомобили</h1>
+</div>
+
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
+        <p>
+            <a class="btn btn-success" asp-action="CarCreate">Добавить автомобиль</a>
+        </p>
+        <table id="listingTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Номер
+                    </th>
+                    <th>
+                        Название автомобиля
+                    </th>
+                    <th>
+                        Описание
+                    </th>
+                    <th>
+                        Неисправность
+                    </th>
+                    <th>
+                        ТО
+                    </th>
+                    <th>
+                        Дата начала работ
+                    </th>
+                    <th>
+                        Дата оконания работ
+                    </th>
+                    <th>
+                        Изменение автомобиля
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Discription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DefectId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TechnicalMaintenanceId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateIn)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOut)
+                        </td>
+                        <td>
+                            <a class="btn btn-warning button-fixed button-sm" asp-action="CarUpdate" asp-route-carId="@item.Id" asp-route-name="@item.Name" 
+                            asp-route-discription="@item.Discription" asp-route-dateOut="@item.DateOut">Изменить</a>
+
+                            <a class="btn btn-danger button-fixed button-sm" asp-action="CarDelete" asp-route-carId="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>              
+        </table>
+    }
+</div>

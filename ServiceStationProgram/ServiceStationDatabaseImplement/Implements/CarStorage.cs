@@ -54,7 +54,7 @@ namespace ServiceStationDatabaseImplement.Implements
             .Include(rec => rec.Defect)
             .Include(rec => rec.TechnicalMaintenance)
             .Include(rec => rec.Inspector)
-            .Where(rec => rec.Id == model.Id)
+            .Where(rec => (model.InspectorId.HasValue && rec.InspectorId == model.InspectorId))
             .ToList()
             .Select(CreateModel)
             .ToList();
@@ -113,8 +113,8 @@ namespace ServiceStationDatabaseImplement.Implements
         }
         private static Car CreateModel(CarBindingModel model, Car car)
         {
-            car.DefectId = (int)model.DefectId;
-            car.TechnicalMaintenanceId = (int)model.TechnicalMaintenanceId;
+            car.DefectId = model.DefectId;
+            car.TechnicalMaintenanceId = model.TechnicalMaintenanceId;
             car.InspectorId = (int)model.InspectorId;
             car.DateIn = model.DateIn;
             car.DateOut = model.DateOut;

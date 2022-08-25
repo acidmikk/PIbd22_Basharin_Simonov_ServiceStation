@@ -18,6 +18,14 @@ namespace ServiceStationDatabaseImplement
             }
             base.OnConfiguring(optionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Car>().Property(m => m.DefectId).IsRequired(false);
+            modelBuilder.Entity<Car>().Property(m => m.TechnicalMaintenanceId).IsRequired(false);
+            base.OnModelCreating(modelBuilder);
+        }
+
         public virtual DbSet<Car> Cars { set; get; }
         public virtual DbSet<Defect> Defects { set; get; }
         public virtual DbSet<Inspector> Inspectors { set; get; }

@@ -15,10 +15,11 @@ namespace ServiceStationContracts.ViewModels
         [DisplayName("Дата начала работ")]
         public DateTime DateIn { get; set; }
         [DisplayName("Дата окончания работ")]
-        public DateTime DateOut { get; set; }
+        public DateTime? DateOut { get; set; }
         [DisplayName("Описание")]
         public string Discription { get; set; }
-        public int DefectId { get; set; }
-        public int TechnicalMaintenanceId { get; set; }
+        public int? DefectId { get; set; }
+        public int? TechnicalMaintenanceId { get; set; }
+
     }
 }

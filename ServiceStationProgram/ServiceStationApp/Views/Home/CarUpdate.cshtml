@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Update Car";
+}
+<div class="text-center">
+    <h2 class="display-4">Изменение автомобиля</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Название автомобиля:</div>
+        <div class="col-8"><input type="text" name="name" id="name" value="@ViewBag.Car.Name" size="35" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Описание:</div>
+        <div class="col-8"><input type="text" name="discription" id="discription" value="@ViewBag.Car.Discription" /></div>
+    </div>
+     <div class="row">
+        <div class="col-4">Дата окончания работ:</div>
+        <div class="col-8"><input type="date" name="dateOut" id="dateOut" value="@ViewBag.Car.DateOut" /></div>
+    </div>    
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
+            <a type="button" asp-action="Car" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+</form>

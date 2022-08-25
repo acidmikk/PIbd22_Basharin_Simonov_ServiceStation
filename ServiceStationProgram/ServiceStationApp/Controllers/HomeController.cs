@@ -106,7 +106,108 @@ namespace ServiceStationApp.Controllers
             throw new Exception("Введите логин, пароль и ФИО");
         }
 
+        public IActionResult Car()
+        {
+            if (Program.Inspector == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIInspector.GetRequest<List<CarViewModel>>($"api/inspector/GetInspectorCarList?inspectorId={Program.Inspector.Id}"));
+        }
 
+        [HttpGet]
+        public IActionResult CarCreate()
+        {            
+            return View();
+        }
+
+        [HttpPost]
+        public void CarCreate(string name, string discription, DateTime dateIn)
+        {
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(discription))
+            {
+                APIInspector.PostRequest("api/car/CreateOrUpdateCar", new CarBindingModel
+                {
+                    Name = name,
+                    Discription = discription,
+                    DateIn = DateTime.Now,
+                    InspectorId = Program.Inspector.Id
+                });
+                Response.Redirect("Car");
+                return;
+            }
+            throw new Exception("Введите название авто и его описание");
+        }
+
+        [HttpGet]
+        public IActionResult CarUpdate(int carId)
+        {
+            ViewBag.Car = APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}");
+            //ViewBag.LoanPrograms = APIClerk.GetRequest<List<LoanProgramViewModel>>("api/client/GetLoanProgramList");
+            //var Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
+            //var clientDeposits = new List<DepositViewModel>();
+            /*foreach (var dep in Deposits)
+            {
+                if (dep.DepositClients.ContainsKey(clientId))
+                {
+                    clientDeposits.Add(dep);
+                }
+            }
+            ViewBag.ClientDeposits = clientDeposits;*/
+            return View();
+        }
+
+        [HttpPost]
+        public void CarUpdate(int carId, string name, string discription, DateTime dateOut)
+        {
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(discription))
+            {
+                var car = APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}");
+                if (car == null)
+                {
+                    return;
+                }
+                if (dateOut != DateTime.MinValue)
+                {
+                    APIInspector.PostRequest("api/car/CreateOrUpdateCar", new CarBindingModel
+                    {
+                        Id = car.Id,
+                        Name = name,
+                        Discription = discription,
+                        DateIn = car.DateIn,
+                        DateOut = dateOut,
+                        DefectId = car.DefectId,
+                        TechnicalMaintenanceId = car.TechnicalMaintenanceId,
+                        InspectorId = Program.Inspector.Id
+                    });
+                }
+                else
+                {
+                    APIInspector.PostRequest("api/car/CreateOrUpdateCar", new CarBindingModel
+                    {
+                        Id = car.Id,
+                        Name = name,
+                        Discription = discription,
+                        DateIn = car.DateIn,
+                        DateOut= null,
+                        DefectId = car.DefectId,
+                        TechnicalMaintenanceId = car.TechnicalMaintenanceId,
+                        InspectorId = Program.Inspector.Id
+                    });
+                }
+                Response.Redirect("Car");
+                return;
+            }
+            throw new Exception("Введите название авто, описание и дату окончания работ");
+        }
+
+        [HttpGet]
+        public void CarDelete(int carId)
+        {
+            var car = APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}");
+            APIInspector.PostRequest("api/car/DeleteCar", car);
+            Response.Redirect("Car");
+        }
 
         /*public IActionResult Defect()
         {

@@ -11,7 +11,7 @@ namespace ServiceStationContracts.BindingModels
         public int? Id { get; set; }
         public string Name { get; set; }
         public DateTime DateIn { get; set; }
-        public DateTime DateOut { get; set; }
+        public DateTime? DateOut { get; set; }
         public string Discription { get; set; }
         public int? DefectId { get; set; }
         public int? TechnicalMaintenanceId { get; set; }

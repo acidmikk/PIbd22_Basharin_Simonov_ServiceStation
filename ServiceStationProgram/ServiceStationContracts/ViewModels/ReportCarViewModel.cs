@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceStationContracts.ViewModels
 {
-    public class ReporCarViewModel
+    public class ReportCarViewModel
     {
         public string CarName { get; set; }
         public string TechnicalMaintenanceName { get; set; }

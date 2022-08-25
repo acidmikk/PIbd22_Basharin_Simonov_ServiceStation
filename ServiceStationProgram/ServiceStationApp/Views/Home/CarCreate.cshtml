@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Create Car";
+}
+<div class="text-center">
+    <h2 class="display-4">Создание автомобиля</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Название автомобиля:</div>
+        <div class="col-8"><input type="text" name="name" id="name" size="35" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Описание:</div>
+        <div class="col-8"><input type="text" name="discription" id="discription" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Создать" class="btn btn-primary" />
+            <a type="button" asp-action="Car" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+</form>
