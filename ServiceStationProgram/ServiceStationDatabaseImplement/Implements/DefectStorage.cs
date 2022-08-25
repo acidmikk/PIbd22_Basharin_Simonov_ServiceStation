@@ -60,7 +60,7 @@ namespace ServiceStationDatabaseImplement.Implements
                     Name = model.Name,
                     Discription = model.Discription,
                     InspectorId = (int)model.InspectorId,
-                    RepairId = (int)model.RepairId
+                    RepairId = model.RepairId
                 };
                 context.Defects.Add(defect);
                 context.SaveChanges();
@@ -113,7 +113,23 @@ namespace ServiceStationDatabaseImplement.Implements
             defect.Name = model.Name;
             defect.Discription = model.Discription;
             defect.InspectorId = (int)model.InspectorId;
-            defect.RepairId = (int)model.RepairId;
+            defect.RepairId = model.RepairId;
+            defect.Cars = new List<Car>();
+            //удаляем привзанные машины
+            if (defect.Cars != null)
+            {
+                defect.Cars.Clear();
+            }            
+            //берём список добавленных
+            foreach (var car in model.DefectCars) 
+            {
+                //ищем в БД машин
+                var defectCar = context.Cars.FirstOrDefault(c => c.Id == car.Key);
+                if (defectCar != null)
+                {
+                    defect.Cars.Add(defectCar);
+                }
+            }            
             return defect;
         }
         private static DefectViewModel CreateModel(Defect defect)

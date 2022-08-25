@@ -198,7 +198,7 @@ namespace ServiceStationApp.Controllers
                 Response.Redirect("Car");
                 return;
             }
-            throw new Exception("Введите название авто, описание и дату окончания работ");
+            throw new Exception("Введите название авто, описание и дату окончания работ, если она уже известна");
         }
 
         [HttpGet]
@@ -209,97 +209,90 @@ namespace ServiceStationApp.Controllers
             Response.Redirect("Car");
         }
 
-        /*public IActionResult Defect()
+        public IActionResult Defect()
         {
             if (Program.Inspector == null)
             {
                 return Redirect("~/Home/Enter");
             }
-            return View(APIInspector.GetRequest<List<DefectViewModel>>($"api/clerk/GetInspectorDefectList?inspectorId={Program.Inspector.Id}"));
+            return View(APIInspector.GetRequest<List<DefectViewModel>>($"api/inspector/GetInspectorDefectList?inspectorId={Program.Inspector.Id}"));
         }
 
         [HttpGet]
         public IActionResult DefectCreate()
         {
-            ViewBag.DefectPrograms = APIInspector.GetRequest<List<DefectViewModel>>("api/client/GetDefectList");
+            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
             return View();
         }
 
         [HttpPost]
-        public void DefectCreate(string Name, string Discription)
+        public void DefectCreate(string name, string discription, List<int> carsId)
         {
             List<CarViewModel> cars = new List<CarViewModel>();
-            if (!string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Discription) && cars != null)
+            foreach (var carId in carsId)
+            {
+                cars.Add(APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}"));
+            }
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(discription) && cars != null)
             {
                 APIInspector.PostRequest("api/defect/CreateOrUpdateDefect", new DefectBindingModel
                 {
-                    Name = Name,
-                    Discription = Discription,
+                    Name = name,
+                    Discription = discription,
+                    DefectCars = cars.ToDictionary(x => x.Id, x => x.Name),
                     InspectorId = Program.Inspector.Id
                 });
                 Response.Redirect("Defect");
                 return;
             }
-            throw new Exception("");
+            throw new Exception("Введите наименование, описание неисправности и выберите автомобили");
         }
 
         [HttpGet]
         public IActionResult DefectUpdate(int defectId)
         {
-            ViewBag.Client = InspectorId.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={defectId}");
-            ViewBag.LoanPrograms = InspectorId.GetRequest<List<LoanProgramViewModel>>("api/client/GetLoanProgramList");
-            var Deposits = InspectorId.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
-            var clientDeposits = new List<DepositViewModel>();
-            foreach (var dep in Deposits)
-            {
-                if (dep.DepositClients.ContainsKey(clientId))
-                {
-                    clientDeposits.Add(dep);
-                }
-            }
-            ViewBag.ClientDeposits = clientDeposits;
+            ViewBag.Defect = APIInspector.GetRequest<DefectViewModel>($"api/defect/GetDefect?defectId={defectId}");
+            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
             return View();
         }
 
         [HttpPost]
-        public void ClientUpdate(int clientId, string clientFIO, string passport, string telephone, List<int> loanProgramsId)
+        public void DefectUpdate(int defectId, string name, string discription, List<int> carsId)
         {
-            if (!string.IsNullOrEmpty(clientFIO) && !string.IsNullOrEmpty(passport) && !string.IsNullOrEmpty(telephone) && loanProgramsId != null)
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(discription) && carsId != null)
             {
-                var client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
-                if (client == null)
+                var defect = APIInspector.GetRequest<DefectViewModel>($"api/defect/GetDefect?defectId={defectId}");
+                if (defect == null)
                 {
                     return;
                 }
-                List<LoanProgramViewModel> loanPrograms = new List<LoanProgramViewModel>();
-                foreach (var loanProgramId in loanProgramsId)
+                List<CarViewModel> cars = new List<CarViewModel>();
+                foreach (var carId in carsId)
                 {
-                    loanPrograms.Add(APIClerk.GetRequest<LoanProgramViewModel>($"api/client/GetLoanProgram?loanProgramId={loanProgramId}"));
+                    cars.Add(APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}"));
                 }
-                APIClerk.PostRequest("api/client/CreateOrUpdateClient", new ClientBindingModel
+                APIInspector.PostRequest("api/defect/CreateOrUpdateDefect", new DefectBindingModel
                 {
-                    Id = client.Id,
-                    ClientFIO = clientFIO,
-                    PassportData = passport,
-                    TelephoneNumber = telephone,
-                    DateVisit = DateTime.Now,
-                    ClientLoanPrograms = loanPrograms.ToDictionary(x => x.Id, x => x.LoanProgramName),
-                    ClerkId = Program.Clerk.Id
+                    Id = defect.Id,
+                    Name = name,
+                    Discription = discription,
+                    DefectCars = cars.ToDictionary(x => x.Id, x => x.Name),
+                    InspectorId = Program.Inspector.Id
                 });
-                Response.Redirect("Client");
+                Response.Redirect("Defect");
                 return;
             }
-            throw new Exception("Введите ФИО, паспортные данные, номер телефона и выберите кредитную программу");
+            throw new Exception("Введите наименование, описание неисправности и выберите автомобили");
         }
 
         [HttpGet]
-        public void ClientDelete(int clientId)
+        public void DefectDelete(int defectId)
         {
-            var client = APIClerk.GetRequest<ClientViewModel>($"api/client/GetClient?clientId={clientId}");
-            APIClerk.PostRequest("api/client/DeleteClient", client);
-            Response.Redirect("Client");
+            var defect = APIInspector.GetRequest<DefectViewModel>($"api/defect/GetDefect?defectId={defectId}");
+            APIInspector.PostRequest("api/defect/DeleteDefect", defect);
+            Response.Redirect("Defect");
         }
-
+        /*
         public IActionResult Deposit()
         {
             if (Program.Clerk == null)

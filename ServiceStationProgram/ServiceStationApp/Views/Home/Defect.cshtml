@@ -1,0 +1,63 @@
+﻿@using ServiceStationContracts.ViewModels
+
+@model List<DefectViewModel>
+@{
+    ViewData["Title"] = "Defects";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Неисправности</h1>
+</div>
+
+<div class="text-center">
+    @{
+        if (Model == null)
+        {
+            <h3 class="display-4">Авторизируйтесь</h3>
+            return;
+        }
+        <p>
+            <a class="btn btn-success" asp-action="DefectCreate">Добавить неисправность</a>
+        </p>
+        <table id="listingTable" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Номер
+                    </th>
+                    <th>
+                        Наименование
+                    </th>
+                    <th>
+                        Описание
+                    </th>
+                    <th>
+                        Изменение неисправности
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Discription)
+                        </td>
+                        <td>
+                            <a class="btn btn-warning button-fixed button-sm" asp-action="DefectUpdate" asp-route-defectId="@item.Id" asp-route-name="@item.Name" 
+                            asp-route-discriprion="@item.Discription">Изменить</a>
+
+                            <a class="btn btn-danger button-fixed button-sm" asp-action="DefectDelete" asp-route-defecttId="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>              
+        </table>
+    }
+</div>

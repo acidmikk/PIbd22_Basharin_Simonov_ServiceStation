@@ -23,6 +23,7 @@ namespace ServiceStationDatabaseImplement
         {
             modelBuilder.Entity<Car>().Property(m => m.DefectId).IsRequired(false);
             modelBuilder.Entity<Car>().Property(m => m.TechnicalMaintenanceId).IsRequired(false);
+            modelBuilder.Entity<Defect>().Property(m => m.RepairId).IsRequired(false);
             base.OnModelCreating(modelBuilder);
         }
 
