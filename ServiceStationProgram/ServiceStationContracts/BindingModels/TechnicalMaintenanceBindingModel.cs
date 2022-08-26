@@ -11,6 +11,7 @@ namespace ServiceStationContracts.BindingModels
         public int? Id { get; set; }
         public string Name { get; set; }
         public string Discription { get; set; }
+        public Dictionary<int, string> TechnicalMaintenanceCars { get; set; }
         public int? InspectorId { get; set; }
     }
 }

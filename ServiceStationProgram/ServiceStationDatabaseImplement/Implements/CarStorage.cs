@@ -132,6 +132,8 @@ namespace ServiceStationDatabaseImplement.Implements
                 Name = car.Name,
                 DateIn = car.DateIn,
                 DateOut = car.DateOut,
+                DefectName = car.Defect?.Name,
+                TechnicalMaintenanceName = car.TechnicalMaintenance?.Name,
                 Discription = car.Discription
             };
         }

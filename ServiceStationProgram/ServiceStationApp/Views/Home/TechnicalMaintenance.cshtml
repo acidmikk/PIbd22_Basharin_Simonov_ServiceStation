@@ -1,12 +1,12 @@
 ﻿@using ServiceStationContracts.ViewModels
 
-@model List<DefectViewModel>
+@model List<TechnicalMaintenanceViewModel>
 @{
-    ViewData["Title"] = "Defects";
+    ViewData["Title"] = "TechnicalMaintenances";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Неисправности</h1>
+    <h1 class="display-4">ТО</h1>
 </div>
 
 <div class="text-center">
@@ -17,7 +17,7 @@
             return;
         }
         <p>
-            <a class="btn btn-success" asp-action="DefectCreate">Добавить неисправность</a>
+            <a class="btn btn-success" asp-action="TechnicalMaintenanceCreate">Добавить ТО</a>
         </p>
         <table id="listingTable" class="table">
             <thead>
@@ -32,7 +32,7 @@
                         Описание
                     </th>
                     <th>
-                        Изменение неисправности
+                        Изменение ТО
                     </th>
                 </tr>
             </thead>
@@ -50,10 +50,12 @@
                             @Html.DisplayFor(modelItem => item.Discription)
                         </td>
                         <td>
-                            <a class="btn btn-warning button-fixed button-sm" asp-action="DefectUpdate" asp-route-defectId="@item.Id" asp-route-name="@item.Name" 
+                            <a class="btn btn-warning button-fixed button-sm" asp-action="TechnicalMaintenanceUpdate" 
+                            asp-route-technicalMaintenanceId="@item.Id" asp-route-name="@item.Name" 
                             asp-route-discriprion="@item.Discription">Изменить</a>
 
-                            <a class="btn btn-danger button-fixed button-sm" asp-action="DefectDelete" asp-route-defectId="@item.Id">Удалить</a>
+                            <a class="btn btn-danger button-fixed button-sm" asp-action="TechnicalMaintenanceDelete" 
+                            asp-route-technicalMaintenanceId="@item.Id">Удалить</a>
                         </td>
                     </tr>
                 }

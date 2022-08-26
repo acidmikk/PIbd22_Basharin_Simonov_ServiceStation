@@ -19,7 +19,9 @@ namespace ServiceStationContracts.ViewModels
         [DisplayName("Описание")]
         public string Discription { get; set; }
         public int? DefectId { get; set; }
+        public string DefectName { get; set; }
         public int? TechnicalMaintenanceId { get; set; }
+        public string TechnicalMaintenanceName { get; set; }
 
     }
 }

@@ -143,17 +143,6 @@ namespace ServiceStationApp.Controllers
         public IActionResult CarUpdate(int carId)
         {
             ViewBag.Car = APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}");
-            //ViewBag.LoanPrograms = APIClerk.GetRequest<List<LoanProgramViewModel>>("api/client/GetLoanProgramList");
-            //var Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
-            //var clientDeposits = new List<DepositViewModel>();
-            /*foreach (var dep in Deposits)
-            {
-                if (dep.DepositClients.ContainsKey(clientId))
-                {
-                    clientDeposits.Add(dep);
-                }
-            }
-            ViewBag.ClientDeposits = clientDeposits;*/
             return View();
         }
 
@@ -253,6 +242,16 @@ namespace ServiceStationApp.Controllers
         {
             ViewBag.Defect = APIInspector.GetRequest<DefectViewModel>($"api/defect/GetDefect?defectId={defectId}");
             ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
+            var cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
+            var defectCars = new List<CarViewModel>();
+            foreach (var car in cars)
+            {
+                if (car.DefectId == defectId)
+                {
+                    defectCars.Add(car);
+                }
+            }
+            ViewBag.DefectCars = defectCars;
             return View();
         }
 
@@ -291,6 +290,100 @@ namespace ServiceStationApp.Controllers
             var defect = APIInspector.GetRequest<DefectViewModel>($"api/defect/GetDefect?defectId={defectId}");
             APIInspector.PostRequest("api/defect/DeleteDefect", defect);
             Response.Redirect("Defect");
+        }
+
+        public IActionResult TechnicalMaintenance()
+        {
+            if (Program.Inspector == null)
+            {
+                return Redirect("~/Home/Enter");
+            }
+            return View(APIInspector.GetRequest<List<TechnicalMaintenanceViewModel>>($"api/inspector/GetInspectorTechnicalMaintenanceList?inspectorId={Program.Inspector.Id}"));
+        }
+
+        [HttpGet]
+        public IActionResult TechnicalMaintenanceCreate()
+        {
+            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
+            return View();
+        }
+
+        [HttpPost]
+        public void TechnicalMaintenanceCreate(string name, string discription, List<int> carsId)
+        {
+            List<CarViewModel> cars = new List<CarViewModel>();
+            foreach (var carId in carsId)
+            {
+                cars.Add(APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}"));
+            }
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(discription) && cars != null)
+            {
+                APIInspector.PostRequest("api/technicalMaintenance/CreateOrUpdateTechnicalMaintenance", new TechnicalMaintenanceBindingModel
+                {
+                    Name = name,
+                    Discription = discription,
+                    TechnicalMaintenanceCars = cars.ToDictionary(x => x.Id, x => x.Name),
+                    InspectorId = Program.Inspector.Id
+                });
+                Response.Redirect("TechnicalMaintenance");
+                return;
+            }
+            throw new Exception("Введите наименование, описание TO и выберите автомобили");
+        }
+
+        [HttpGet]
+        public IActionResult TechnicalMaintenanceUpdate(int technicalMaintenanceId)
+        {
+            ViewBag.TechnicalMaintenance = APIInspector.GetRequest<TechnicalMaintenanceViewModel>($"api/TechnicalMaintenance/GetTechnicalMaintenance?technicalMaintenanceId={technicalMaintenanceId}");
+            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
+            var cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
+            var technicalMaintenanceCars = new List<CarViewModel>();
+            foreach (var car in cars)
+            {
+                if (car.TechnicalMaintenanceId == technicalMaintenanceId)
+                {
+                    technicalMaintenanceCars.Add(car);
+                }
+            }
+            ViewBag.TechnicalMaintenanceCars = technicalMaintenanceCars;
+            return View();
+        }
+
+        [HttpPost]
+        public void TechnicalMaintenanceUpdate(int technicalMaintenanceId, string name, string discription, List<int> carsId)
+        {
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(discription) && carsId != null)
+            {
+                var technicalMaintenance = APIInspector.GetRequest<TechnicalMaintenanceViewModel>($"api/TechnicalMaintenance/GetTechnicalMaintenance?technicalMaintenanceId={technicalMaintenanceId}");
+                if (technicalMaintenance == null)
+                {
+                    return;
+                }
+                List<CarViewModel> cars = new List<CarViewModel>();
+                foreach (var carId in carsId)
+                {
+                    cars.Add(APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}"));
+                }
+                APIInspector.PostRequest("api/TechnicalMaintenance/CreateOrUpdateTechnicalMaintenance", new TechnicalMaintenanceBindingModel
+                {
+                    Id = technicalMaintenance.Id,
+                    Name = name,
+                    Discription = discription,
+                    TechnicalMaintenanceCars = cars.ToDictionary(x => x.Id, x => x.Name),
+                    InspectorId = Program.Inspector.Id
+                });
+                Response.Redirect("TechnicalMaintenance");
+                return;
+            }
+            throw new Exception("Введите наименование, описание TO и выберите автомобили");
+        }
+
+        [HttpGet]
+        public void TechnicalMaintenanceDelete(int technicalMaintenanceId)
+        {
+            var technicalMaintenance = APIInspector.GetRequest<TechnicalMaintenanceViewModel>($"api/TechnicalMaintenance/GetTechnicalMaintenance?technicalMaintenanceId={technicalMaintenanceId}");
+            APIInspector.PostRequest("api/TechnicalMaintenance/DeleteTechnicalMaintenance", technicalMaintenance);
+            Response.Redirect("TechnicalMaintenance");
         }
         /*
         public IActionResult Deposit()

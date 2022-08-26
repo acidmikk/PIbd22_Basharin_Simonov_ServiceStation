@@ -65,6 +65,7 @@ namespace ServiceStationDatabaseImplement.Implements
                 context.Defects.Add(defect);
                 context.SaveChanges();
                 CreateModel(model, defect, context);
+                context.SaveChanges();
                 transaction.Commit();
             }
             catch
@@ -100,6 +101,12 @@ namespace ServiceStationDatabaseImplement.Implements
             Defect element = context.Defects.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
+                var defectCars = context.Cars.Where(rec => rec.DefectId == model.Id);
+                foreach (var car in defectCars)
+                {
+                    car.DefectId = null;
+                }
+                context.SaveChanges();
                 context.Defects.Remove(element);
                 context.SaveChanges();
             }
@@ -114,14 +121,16 @@ namespace ServiceStationDatabaseImplement.Implements
             defect.Discription = model.Discription;
             defect.InspectorId = (int)model.InspectorId;
             defect.RepairId = model.RepairId;
-            defect.Cars = new List<Car>();
-            //удаляем привзанные машины
-            if (defect.Cars != null)
+            //отвязываем ранее привязанные машины
+            var cars = context.Cars.Where(rec => rec.DefectId == model.Id).ToList();
+            foreach(var car in cars)
             {
-                defect.Cars.Clear();
-            }            
+                car.DefectId = null;
+                context.SaveChanges();
+            }
+            defect.Cars = new List<Car>();
             //берём список добавленных
-            foreach (var car in model.DefectCars) 
+            foreach (var car in model.DefectCars)
             {
                 //ищем в БД машин
                 var defectCar = context.Cars.FirstOrDefault(c => c.Id == car.Key);

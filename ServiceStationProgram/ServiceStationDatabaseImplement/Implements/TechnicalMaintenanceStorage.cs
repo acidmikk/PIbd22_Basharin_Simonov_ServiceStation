@@ -60,6 +60,7 @@ namespace ServiceStationDatabaseImplement.Implements
                 context.TechnicalMaintenances.Add(technicalMaintenance);
                 context.SaveChanges();
                 CreateModel(model, technicalMaintenance, context);
+                context.SaveChanges();
                 transaction.Commit();
             }
             catch
@@ -95,6 +96,12 @@ namespace ServiceStationDatabaseImplement.Implements
             TechnicalMaintenance element = context.TechnicalMaintenances.FirstOrDefault(rec => rec.Id == model.Id);
             if (element != null)
             {
+                var technicalMaintenanceCars = context.Cars.Where(rec => rec.TechnicalMaintenanceId == model.Id);
+                foreach(var car in technicalMaintenanceCars)
+                {
+                    car.TechnicalMaintenanceId = null;                    
+                }
+                context.SaveChanges();
                 context.TechnicalMaintenances.Remove(element);
                 context.SaveChanges();
             }
@@ -108,6 +115,24 @@ namespace ServiceStationDatabaseImplement.Implements
             technicalMaintenance.Name = model.Name;
             technicalMaintenance.Discription = model.Discription;
             technicalMaintenance.InspectorId = (int)model.InspectorId;
+            //отвязываем ранее привязанные машины
+            var cars = context.Cars.Where(rec => rec.TechnicalMaintenanceId == model.Id).ToList();
+            foreach (var car in cars)
+            {
+                car.TechnicalMaintenanceId = null;
+                context.SaveChanges();
+            }
+            technicalMaintenance.Cars = new List<Car>();
+            //берём список добавленных
+            foreach (var tmc in model.TechnicalMaintenanceCars)
+            {
+                //ищем в БД машин
+                var technicalMaintenanceCar = context.Cars.FirstOrDefault(c => c.Id == tmc.Key);
+                if (technicalMaintenanceCar != null)
+                {
+                    technicalMaintenance.Cars.Add(technicalMaintenanceCar);
+                }
+            }
             return technicalMaintenance;
         }
         private static TechnicalMaintenanceViewModel CreateModel(TechnicalMaintenance technicalMaintenance)

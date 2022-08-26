@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Update Defect";
+}
+<div class="text-center">
+    <h2 class="display-4">Изменение неисправности</h2>
+</div>
+<form method="post">
+    <div class="row">
+        <div class="col-4">Наименование неисправности:</div>
+        <div class="col-8"><input type="text" name="name" id="name" value="@ViewBag.Defect.Name" size="35" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Описание:</div>
+        <div class="col-8"><input type="text" name="discription" id="discription" value="@ViewBag.Defect.Discription" /></div>
+    </div>
+    <div class="row">
+        <div class="col-4">Автомобили:</div>
+        <div class="col-8">
+            <select id="carsId" name="carsId" multiple="multiple" class="form-control" asp-items="@(new SelectList(@ViewBag.Cars,"Id", "Name"))"></select>
+        </div>
+    </div> 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Автомобили
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.DefectCars)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>   
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Сохранить изменения" class="btn btn-primary" />
+            <a type="button" asp-action="Defect" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+</form>
