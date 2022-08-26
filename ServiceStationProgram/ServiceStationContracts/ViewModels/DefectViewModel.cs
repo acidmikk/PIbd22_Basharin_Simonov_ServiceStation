@@ -16,5 +16,7 @@ namespace ServiceStationContracts.ViewModels
         public string Discription { get; set; }
         public Dictionary<int, string> DefectCars { get; set; }
         public int? RepairId { get; set; }
+        public string RepairName { get; set; }
+        public int? InspectorId { get; set; }
     }
 }

@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Create DefectRepair";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Привязка неисправностей к ремонту</h1>
+</div>
+
+<form method="post">
+    <div class="row">
+        <div class="col-4">Неисправность:</div>
+        <div class="col-8">
+            <select id="depositId" name="defectId" class="form-control" asp-items="@(new SelectList(@ViewBag.Defects,"Id", "Name"))"></select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Ремонт:</div>
+        <div class="col-8">
+            <select id="repairId" name="repairId" class="form-control" asp-items="@(new SelectList(@ViewBag.Repairs,"Id", "Name"))"></select>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-4"></div>
+        <div class="col-8">
+            <input type="submit" value="Привязать" class="btn btn-primary"/>
+            <a type="button" asp-action="Defect" class="btn btn-primary">Отмена</a>
+        </div>
+    </div>
+</form>

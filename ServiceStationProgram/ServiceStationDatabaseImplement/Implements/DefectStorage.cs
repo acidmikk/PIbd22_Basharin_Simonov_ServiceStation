@@ -121,24 +121,26 @@ namespace ServiceStationDatabaseImplement.Implements
             defect.Discription = model.Discription;
             defect.InspectorId = (int)model.InspectorId;
             defect.RepairId = model.RepairId;
-            //отвязываем ранее привязанные машины
-            var cars = context.Cars.Where(rec => rec.DefectId == model.Id).ToList();
-            foreach(var car in cars)
-            {
-                car.DefectId = null;
-                context.SaveChanges();
-            }
-            defect.Cars = new List<Car>();
-            //берём список добавленных
-            foreach (var car in model.DefectCars)
-            {
-                //ищем в БД машин
-                var defectCar = context.Cars.FirstOrDefault(c => c.Id == car.Key);
-                if (defectCar != null)
+            if (model.DefectCars != null) {
+                //отвязываем ранее привязанные машины
+                var cars = context.Cars.Where(rec => rec.DefectId == model.Id).ToList();
+                foreach (var car in cars)
                 {
-                    defect.Cars.Add(defectCar);
+                    car.DefectId = null;
+                    context.SaveChanges();
                 }
-            }            
+                defect.Cars = new List<Car>();
+                //берём список добавленных
+                foreach (var car in model.DefectCars)
+                {
+                    //ищем в БД машин
+                    var defectCar = context.Cars.FirstOrDefault(c => c.Id == car.Key);
+                    if (defectCar != null)
+                    {
+                        defect.Cars.Add(defectCar);
+                    }
+                }
+            }
             return defect;
         }
         private static DefectViewModel CreateModel(Defect defect)
@@ -148,7 +150,9 @@ namespace ServiceStationDatabaseImplement.Implements
                 Id = defect.Id,
                 Name = defect.Name,
                 Discription = defect.Discription,
-                RepairId = defect.RepairId
+                RepairId = defect.RepairId,
+                RepairName = defect.Repair?.Name,
+                InspectorId = defect.InspectorId
             };
         }
     }

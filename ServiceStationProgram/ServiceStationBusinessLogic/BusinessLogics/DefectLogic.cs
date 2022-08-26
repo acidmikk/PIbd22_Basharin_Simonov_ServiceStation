@@ -13,9 +13,11 @@ namespace ServiceStationBusinessLogic.BusinessLogics
     public class DefectLogic : IDefectLogic
     {
         private readonly IDefectStorage _defectStorage;
-        public DefectLogic(IDefectStorage defectStorage)
+        private readonly IRepairStorage _repairStorage;
+        public DefectLogic(IDefectStorage defectStorage, IRepairStorage repairStorage)
         {
             _defectStorage = defectStorage;
+            _repairStorage = repairStorage;
         }
         public List<DefectViewModel> Read(DefectBindingModel model)
         {
@@ -51,6 +53,40 @@ namespace ServiceStationBusinessLogic.BusinessLogics
                 throw new Exception("Удаляемый элемент не найден");
             }
             _defectStorage.Delete(model);
+        }
+
+        public void AddRepair(AddDefectRepairBindingModel model)
+        {
+            var defect = _defectStorage.GetElement(new DefectBindingModel
+            {
+                Id = model.DefectId
+            });
+
+            if (defect == null)
+            {
+                throw new Exception("Неисправность не найдена");
+            }
+
+            var repair = _repairStorage.GetElement(new RepairBindingModel
+            {
+                Id = model.RepairId
+            });
+
+            if (repair == null)
+            {
+                throw new Exception("Ремонт не найден");
+            }
+
+            defect.RepairId = repair.Id;
+
+            _defectStorage.Update(new DefectBindingModel
+            {
+                Id = defect.Id,
+                Name = defect.Name,
+                Discription = defect.Discription,
+                InspectorId = defect.InspectorId,                
+                RepairId = defect.RepairId
+            });
         }
     }
 }

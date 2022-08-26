@@ -11,11 +11,13 @@ namespace ServiceStationRestAPI.Controllers
     {
         private readonly IDefectLogic _defectLogic;
         private readonly ICarLogic _carLogic;
+        private readonly IRepairLogic _repairLogic;
 
-        public DefectController(IDefectLogic defectLogic, ICarLogic carLogic)
+        public DefectController(IDefectLogic defectLogic, ICarLogic carLogic, IRepairLogic repairLogic)
         {
             _defectLogic = defectLogic;
             _carLogic = carLogic;
+            _repairLogic = repairLogic;
         }
 
         [HttpGet]
@@ -35,5 +37,14 @@ namespace ServiceStationRestAPI.Controllers
 
         [HttpPost]
         public void DeleteDefect(DefectBindingModel model) => _defectLogic.Delete(model);
+
+        [HttpGet]
+        public List<RepairViewModel> GetRepairList() => _repairLogic.Read(null)?.ToList();
+
+        [HttpGet]
+        public RepairViewModel GetRepair(int repairId) => _repairLogic.Read(new RepairBindingModel { Id = repairId })?[0];
+
+        [HttpPost]
+        public void AddDefectRepair(AddDefectRepairBindingModel model) => _defectLogic.AddRepair(model);
     }
 }

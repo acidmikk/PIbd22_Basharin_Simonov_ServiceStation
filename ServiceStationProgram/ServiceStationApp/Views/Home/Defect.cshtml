@@ -32,6 +32,9 @@
                         Описание
                     </th>
                     <th>
+                        Ремонт
+                    </th>
+                    <th>
                         Изменение неисправности
                     </th>
                 </tr>
@@ -48,6 +51,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Discription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RepairName)
                         </td>
                         <td>
                             <a class="btn btn-warning button-fixed button-sm" asp-action="DefectUpdate" asp-route-defectId="@item.Id" asp-route-name="@item.Name" 

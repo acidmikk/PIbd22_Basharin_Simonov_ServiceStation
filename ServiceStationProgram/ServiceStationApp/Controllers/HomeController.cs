@@ -389,180 +389,33 @@ namespace ServiceStationApp.Controllers
             APIInspector.PostRequest("api/TechnicalMaintenance/DeleteTechnicalMaintenance", technicalMaintenance);
             Response.Redirect("TechnicalMaintenance");
         }
-        /*
-        public IActionResult Deposit()
+
+        [HttpGet]
+        public IActionResult AddDefectRepair()
         {
-            if (Program.Clerk == null)
+            if (Program.Inspector == null)
             {
                 return Redirect("~/Home/Enter");
             }
-            return View(APIClerk.GetRequest<List<DepositViewModel>>($"api/clerk/GetClerkDepositList?clerkId={Program.Clerk.Id}"));
-        }
-
-        [HttpGet]
-        public IActionResult DepositCreate()
-        {
+            ViewBag.Defects = APIInspector.GetRequest<List<DefectViewModel>>($"api/inspector/GetInspectorDefectList?inspectorId={Program.Inspector.Id}");
+            ViewBag.Repairs = APIInspector.GetRequest<List<RepairViewModel>>("api/defect/GetRepairList");
             return View();
         }
 
         [HttpPost]
-        public void DepositCreate(string depositName, decimal depositInterest)
+        public void AddDefectRepair(int defectId, int repairId)
         {
-            if (!string.IsNullOrEmpty(depositName))
+            if (defectId != 0 && repairId != 0)
             {
-                APIClerk.PostRequest("api/deposit/CreateOrUpdateDeposit", new DepositBindingModel
+                APIInspector.PostRequest("api/defect/AddDefectRepair", new AddDefectRepairBindingModel
                 {
-                    DepositName = depositName,
-                    DepositInterest = depositInterest,
-                    DepositClients = new Dictionary<int, string>(),
-                    ClerkId = Program.Clerk.Id
+                    DefectId = defectId,
+                    RepairId = repairId
                 });
-                Response.Redirect("Deposit");
+                Response.Redirect("Defect");
                 return;
             }
-            throw new Exception("Введите наименование вклада и процентную ставку");
+            throw new Exception("Выберите неисправность и ремонт");
         }
-
-        [HttpGet]
-        public IActionResult DepositUpdate(int depositId)
-        {
-            ViewBag.Deposit = APIClerk.GetRequest<DepositViewModel>($"api/deposit/GetDeposit?depositId={depositId}");
-            return View();
-        }
-
-        [HttpPost]
-        public void DepositUpdate(int depositId, string depositName, decimal depositInterest)
-        {
-            if (!string.IsNullOrEmpty(depositName) && depositInterest != 0)
-            {
-                var deposit = APIClerk.GetRequest<DepositViewModel>($"api/deposit/GetDeposit?depositId={depositId}");
-                if (deposit == null)
-                {
-                    return;
-                }
-                APIClerk.PostRequest("api/deposit/CreateOrUpdateDeposit", new DepositBindingModel
-                {
-                    Id = deposit.Id,
-                    DepositName = depositName,
-                    DepositInterest = depositInterest,
-                    DepositClients = deposit.DepositClients,
-                    ClerkId = Program.Clerk.Id
-                });
-                Response.Redirect("Deposit");
-                return;
-            }
-            throw new Exception("Введите наименование вклада и процентную ставку");
-        }
-
-        [HttpGet]
-        public void DepositDelete(int depositId)
-        {
-            var deposit = APIClerk.GetRequest<DepositViewModel>($"api/deposit/GetDeposit?depositId={depositId}");
-            APIClerk.PostRequest("api/deposit/DeleteDeposit", deposit);
-            Response.Redirect("Deposit");
-        }
-
-        public IActionResult Replenishment()
-        {
-            if (Program.Clerk == null)
-            {
-                return Redirect("~/Home/Enter");
-            }
-            return View(APIClerk.GetRequest<List<ReplenishmentViewModel>>($"api/clerk/GetClerkReplenishmentList?clerkId={Program.Clerk.Id}"));
-        }
-
-        [HttpGet]
-        public IActionResult ReplenishmentCreate()
-        {
-            ViewBag.Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
-            return View();
-        }
-
-        [HttpPost]
-        public void ReplenishmentCreate(int replenishmentAmount, int depositId)
-        {
-            if (replenishmentAmount != 0 && depositId != 0)
-            {
-                APIClerk.PostRequest("api/replenishment/CreateOrUpdateReplenishment", new ReplenishmentBindingModel
-                {
-                    Amount = replenishmentAmount,
-                    DateReplenishment = DateTime.Now,
-                    DepositId = depositId,
-                    ClerkId = Program.Clerk.Id
-                });
-                Response.Redirect("Replenishment");
-                return;
-            }
-            throw new Exception("Введите сумму пополнения и выберите вклад");
-        }
-
-        [HttpGet]
-        public IActionResult ReplenishmentUpdate(int replenishmentId)
-        {
-            ViewBag.Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
-            ViewBag.Replenishment = APIClerk.GetRequest<ReplenishmentViewModel>($"api/replenishment/GetReplenishment?replenishmentId={replenishmentId}");
-            return View();
-        }
-
-        [HttpPost]
-        public void ReplenishmentUpdate(int replenishmentId, int replenishmentAmount, int depositId)
-        {
-            if (replenishmentAmount != 0 && replenishmentAmount != 0 && depositId != 0)
-            {
-                var replenishment = APIClerk.GetRequest<ReplenishmentViewModel>($"api/replenishment/GetReplenishment?replenishmentId={replenishmentId}");
-                if (replenishment == null)
-                {
-                    return;
-                }
-                APIClerk.PostRequest("api/replenishment/CreateOrUpdateReplenishment", new ReplenishmentBindingModel
-                {
-                    Id = replenishment.Id,
-                    Amount = replenishmentAmount,
-                    DateReplenishment = DateTime.Now,
-                    DepositId = depositId,
-                    ClerkId = Program.Clerk.Id
-                });
-                Response.Redirect("Replenishment");
-                return;
-            }
-            throw new Exception("Введите сумму пополнения и выберите вклад");
-        }
-
-        [HttpGet]
-        public void ReplenishmentDelete(int replenishmentId)
-        {
-            var replenishment = APIClerk.GetRequest<ReplenishmentViewModel>($"api/replenishment/GetReplenishment?replenishmentId={replenishmentId}");
-            APIClerk.PostRequest("api/replenishment/DeleteReplenishment", replenishment);
-            Response.Redirect("Replenishment");
-        }
-
-        [HttpGet]
-        public IActionResult AddDepositClients()
-        {
-            if (Program.Clerk == null)
-            {
-                return Redirect("~/Home/Enter");
-            }
-            ViewBag.Deposits = APIClerk.GetRequest<List<DepositViewModel>>("api/deposit/GetDepositList");
-            ViewBag.Clients = APIClerk.GetRequest<List<ClientViewModel>>($"api/clerk/GetClerkClientList?clerkId={Program.Clerk.Id}");
-            return View();
-        }
-
-        [HttpPost]
-        public void AddDepositClients(int depositId, List<int> clientsId)
-        {
-            if (depositId != 0 && clientsId != null)
-            {
-                APIClerk.PostRequest("api/deposit/AddDepositClients", new AddClientsBindingModel
-                {
-                    DepositId = depositId,
-                    ClientsId = clientsId
-                });
-                Response.Redirect("Deposit");
-                return;
-            }
-            throw new Exception("Выберите вклад и клиентов");
-        }
-        */
     }
 }

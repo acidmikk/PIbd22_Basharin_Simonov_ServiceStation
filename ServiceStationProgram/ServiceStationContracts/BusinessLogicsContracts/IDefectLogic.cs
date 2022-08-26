@@ -13,5 +13,6 @@ namespace ServiceStationContracts.BusinessLogicsContracts
         List<DefectViewModel> Read(DefectBindingModel model);
         void CreateOrUpdate(DefectBindingModel model);
         void Delete(DefectBindingModel model);
+        void AddRepair(AddDefectRepairBindingModel model);
     }
 }
