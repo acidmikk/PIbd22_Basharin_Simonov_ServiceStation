@@ -23,7 +23,7 @@ namespace ServiceStationBusinessLogic.OfficePackage
                 Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }",
                 Style = "Normal"
             });
-            CreateTable(new List<string> { "6cm", "3cm", "5cm", "5cm" });
+            CreateTable(new List<string> { "5cm", "3cm", "5cm", "5cm" });
             CreateRow(new PdfRowParameters
             {
                 Texts = new List<string> { "Наименование авто", "Дата обращения", "Неисправность", "ТО" },
