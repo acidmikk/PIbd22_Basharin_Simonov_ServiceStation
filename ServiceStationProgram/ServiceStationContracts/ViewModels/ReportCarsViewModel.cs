@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ServiceStationContracts.ViewModels
 {
-    internal class ReportAllCarViewModel
+    //Модель для получения отчёта по машинам (Inspector)
+    public class ReportCarsViewModel
     {
+
     }
 }

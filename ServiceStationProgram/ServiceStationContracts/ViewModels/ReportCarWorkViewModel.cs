@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ServiceStationContracts.ViewModels
 {
-    internal class ReportCarWorkViewModel
+    //Модель для получения списка работ по выбранным машинам (Inspector)
+    public class ReportCarWorkViewModel
     {
         public string CarName { get; set; }
-        public string TechnicalMaintenanceName { get; set; }
-        public List<Tuple<string>> Defects { get; set; }
+        public List<string> Works { get; set; }
     }
 }

@@ -12,8 +12,7 @@ using System.Threading.Tasks;
 namespace ServiceStationBusinessLogic.OfficePackage.Implements
 {
     public class SaveToWord : AbstractSaveToWord
-    {
-        /*
+    {        
         private WordprocessingDocument _wordDocument;
         private Body _docBody;
         /// <summary>
@@ -122,6 +121,5 @@ namespace ServiceStationBusinessLogic.OfficePackage.Implements
             _wordDocument.MainDocumentPart.Document.Save();
             _wordDocument.Close();
         }
-        */
     }
 }

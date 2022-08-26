@@ -16,18 +16,18 @@ namespace ServiceStationRestAPI.Controllers
             _reportLogic = reportLogic;
             _carLogic = carLogic;
         }
+        
+        [HttpPost]
+        public void CreateReportCarWorkToWordFile(ReportBindingModel model) => _reportLogic.SaveCarWorkToWordFile(model);
+
+        [HttpPost]
+        public void CreateReportCarWorkToExcelFile(ReportBindingModel model) => _reportLogic.SaveCarWorkToExcelFile(model);
         /*
         [HttpPost]
-        public void CreateReportClientCurrencyToWordFile(ReportBindingModel model) => _reportLogic.SaveClientCurrencyToWordFile(model);
-
-        [HttpPost]
-        public void CreateReportClientCurrencyToExcelFile(ReportBindingModel model) => _reportLogic.SaveClientCurrencyToExcelFile(model);
-
-        [HttpPost]
         public void CreateReportClientsToPdfFile(ReportBindingModel model) => _reportLogic.SaveClientsToPdfFile(model);
-
+        
         [HttpGet]
         public List<ReportClientsViewModel> GetClientsReport(string dateFrom, string dateTo) => _reportLogic.GetClients(new ReportBindingModel { DateFrom = Convert.ToDateTime(dateFrom), DateTo = Convert.ToDateTime(dateTo) });
-    */
+        */
     }
 }

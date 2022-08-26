@@ -14,8 +14,7 @@ using System.Threading.Tasks;
 namespace ServiceStationBusinessLogic.OfficePackage.Implements
 {
     public class SaveToExcel : AbstractSaveToExcel
-    {
-        /*
+    {        
         private SpreadsheetDocument _spreadsheetDocument;
         private SharedStringTablePart _shareStringPart;
         private Worksheet _worksheet;
@@ -325,6 +324,5 @@ namespace ServiceStationBusinessLogic.OfficePackage.Implements
             _spreadsheetDocument.WorkbookPart.Workbook.Save();
             _spreadsheetDocument.Close();
         }
-        */
     }
 }

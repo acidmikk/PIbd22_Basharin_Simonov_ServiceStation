@@ -191,7 +191,7 @@ namespace ServiceStationApp.Controllers
                 Response.Redirect("Car");
                 return;
             }
-            throw new Exception("Введите название авто, описание");
+            throw new Exception("Введите название автомобиля, описание");
         }
 
         [HttpGet]

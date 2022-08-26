@@ -10,21 +10,23 @@ namespace ServiceStationContracts.BusinessLogicsContracts
 {
     public interface IReportLogic
     {
+        
+        //Inspector
+
+        // Получение списка работ по выбранным машинам
+        List<ReportCarWorkViewModel> GetCarWork(ReportBindingModel model);
+
+        // Сохранение работ по выбранным машинам в файл-Word
+        void SaveCarWorkToWordFile(ReportBindingModel model);
+
+        // Сохранение работ по выбранным машинам в файл-Excel
+        void SaveCarWorkToExcelFile(ReportBindingModel model);
+
+        // Получение списка машин за период
+        List<ReportCarsViewModel> GetCars(ReportBindingModel model);
+
+
         /*
-        //Clerk
-
-        // Получение списка валют по выбранным клиентам
-        List<ReportClientCurrencyViewModel> GetClientCurrency(ReportBindingModel model);
-
-        // Сохранение валют по выбранным клиентам в файл-Word
-        void SaveClientCurrencyToWordFile(ReportBindingModel model);
-
-        // Сохранение валют по выбранным клиентам в файл-Excel
-        void SaveClientCurrencyToExcelFile(ReportBindingModel model);
-
-        // Получение списка клиентов за период
-        List<ReportClientsViewModel> GetClients(ReportBindingModel model);
-
         //Manager
 
         // Получение списка вкладов по выбранным кредитным программам
