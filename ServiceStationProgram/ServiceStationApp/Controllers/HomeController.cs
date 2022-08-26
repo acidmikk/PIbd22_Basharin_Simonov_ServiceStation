@@ -149,9 +149,13 @@ namespace ServiceStationApp.Controllers
         [HttpPost]
         public void CarUpdate(int carId, string name, string discription, DateTime dateOut)
         {
+            var car = APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}");
+            if (dateOut < car.DateIn)
+            {
+                throw new Exception("Дата окончания работ должна быть больше, чем дата начала работ");
+            }
             if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(discription))
             {
-                var car = APIInspector.GetRequest<CarViewModel>($"api/car/GetCar?carId={carId}");
                 if (car == null)
                 {
                     return;
@@ -178,7 +182,7 @@ namespace ServiceStationApp.Controllers
                         Name = name,
                         Discription = discription,
                         DateIn = car.DateIn,
-                        DateOut= null,
+                        DateOut = null,
                         DefectId = car.DefectId,
                         TechnicalMaintenanceId = car.TechnicalMaintenanceId,
                         InspectorId = Program.Inspector.Id
@@ -187,7 +191,7 @@ namespace ServiceStationApp.Controllers
                 Response.Redirect("Car");
                 return;
             }
-            throw new Exception("Введите название авто, описание и дату окончания работ, если она уже известна");
+            throw new Exception("Введите название авто, описание");
         }
 
         [HttpGet]
