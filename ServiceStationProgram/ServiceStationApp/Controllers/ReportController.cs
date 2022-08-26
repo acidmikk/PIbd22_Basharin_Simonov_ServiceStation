@@ -72,8 +72,7 @@ namespace ServiceStationApp.Controllers
             }
             throw new Exception("Выберите хотя бы одну машину");
         }
-
-        /*
+               
         public IActionResult ReportPDF()
         {
             if (Program.Inspector == null)
@@ -87,7 +86,7 @@ namespace ServiceStationApp.Controllers
         public IActionResult ReportGetClientsPDF(DateTime dateFrom, DateTime dateTo)
         {
             ViewBag.Period = "C " + dateFrom.ToLongDateString() + " по " + dateTo.ToLongDateString();
-            ViewBag.Report = APIInspector.GetRequest<List<ReportClientsViewModel>>($"api/report/GetClientsReport?dateFrom={dateFrom.ToLongDateString()}&dateTo={dateTo.ToLongDateString()}");
+            ViewBag.Report = APIInspector.GetRequest<List<ReportCarsViewModel>>($"api/report/GetCarsReport?dateFrom={dateFrom.ToLongDateString()}&dateTo={dateTo.ToLongDateString()}");
             return View("ReportPdf");
         }
 
@@ -99,17 +98,17 @@ namespace ServiceStationApp.Controllers
                 DateFrom = dateFrom,
                 DateTo = dateTo
             };
-            model.FileName = @"..\BankClerkApp\wwwroot\ReportClientCurrency\ReportClientsPdf.pdf";
-            APIInspector.PostRequest("api/report/CreateReportClientsToPdfFile", model);
+            model.FileName = @"..\ServiceStationApp\wwwroot\ReportCarWork\ReportCarWorkPdf.pdf";
+            APIInspector.PostRequest("api/report/CreateReportCarsToPdfFile", model);
             _mailKitWorker.MailSendAsync(new MailSendInfoBindingModel
             {
                 MailAddress = Program.Inspector.Email,
-                Subject = "Отчет по клиентам. Банк \"Вы банкрот\"",
-                Text = "Отчет по клиентам с " + dateFrom.ToShortDateString() + " по " + dateTo.ToShortDateString() +
-                "\nРуководитель - " + Program.Inspector.InspectorFIO,
+                Subject = "Отчет по машинам. СТО \"Руки-крюки\"",
+                Text = "Отчет по машинам с " + dateFrom.ToShortDateString() + " по " + dateTo.ToShortDateString() +
+                "\nИсполнитель: " + Program.Inspector.InspectorFIO,
                 FileName = model.FileName
             });
             return View();
-        }*/
+        }
     }
 }

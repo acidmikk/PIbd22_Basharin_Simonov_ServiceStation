@@ -16,16 +16,14 @@ namespace ServiceStationBusinessLogic.BusinessLogics
     {
         private readonly ICarStorage _carStorage;
         private readonly IWorkStorage _workStorage;
-        private readonly ITechnicalMaintenanceStorage _technicalMaintenanceStorage;
         private readonly AbstractSaveToWord _saveToWord;
         private readonly AbstractSaveToExcel _saveToExcel;
         private readonly AbstractSaveToPdf _saveToPdf;
-        public ReportLogic(ICarStorage carStorage, IWorkStorage workStorage, ITechnicalMaintenanceStorage technicalMaintenanceStorage,
+        public ReportLogic(ICarStorage carStorage, IWorkStorage workStorage,
             AbstractSaveToWord saveToWord, AbstractSaveToExcel saveToExcel, AbstractSaveToPdf saveToPdf)
         {
             _carStorage = carStorage;
             _workStorage = workStorage;
-            _technicalMaintenanceStorage = technicalMaintenanceStorage;
             _saveToExcel = saveToExcel;
             _saveToWord = saveToWord;
             _saveToPdf = saveToPdf;
@@ -51,23 +49,30 @@ namespace ServiceStationBusinessLogic.BusinessLogics
                 }
                 record.Works = record.Works.Distinct().ToList();
                 list.Add(record);
+            }
+            return list;
+        }
 
-                /*
-                foreach (var loanProgramKVP in car.ClientLoanPrograms)
+        public List<ReportCarsViewModel> GetCars(ReportBindingModel model)
+        {
+            var list = new List<ReportCarsViewModel>();
+            var cars = _carStorage.GetFilteredList(new CarBindingModel
+            {
+                DateFrom = model.DateFrom,
+                DateTo = model.DateTo,
+                InspectorId = model.InspectorId
+            });
+
+            foreach (var car in cars)
+            {
+                var record = new ReportCarsViewModel
                 {
-                    var lp = _loanProgramStorage.GetElement(new LoanProgramBindingModel { Id = loanProgramKVP.Key });
-                    foreach (var currency in lp.LoanProgramCurrencies)
-                    {
-                        record.Currencies.Add(currency.Value.Item1);
-                    }
-                }
-                var deposits = _depositStorage.GetFullList().Where(rec => rec.DepositClients.Keys.ToList().Contains(car.Id)).ToList();
-                foreach (var deposit in deposits)
-                {
-                    var currencies = _currencyStorage.GetFullList().Where(rec => rec.CurrencyDeposits.Keys.ToList().Contains(deposit.Id)).ToList();
-                    record.Currencies.AddRange(currencies.Select(cur => cur.CurrencyName));
-                }
-                */
+                    CarName = car.Name,
+                    DateIn = car.DateIn,
+                    TechnicalMaintenanceName = car.TechnicalMaintenanceName,
+                    DefectName = car.DefectName
+                };
+                list.Add(record);
             }
             return list;
         }
@@ -89,6 +94,18 @@ namespace ServiceStationBusinessLogic.BusinessLogics
                 FileName = model.FileName,
                 Title = "Работы по машинам",
                 CarWork = GetCarWork(model),
+            });
+        }
+
+        public void SaveCarsToPdfFile(ReportBindingModel model)
+        {
+            _saveToPdf.CreatePdfInspector(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Сведения по машинам",
+                DateFrom = model.DateFrom.Value,
+                DateTo = model.DateTo.Value,
+                Cars = GetCars(model)
             });
         }
     }

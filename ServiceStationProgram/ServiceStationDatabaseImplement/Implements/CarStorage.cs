@@ -54,7 +54,9 @@ namespace ServiceStationDatabaseImplement.Implements
             .Include(rec => rec.Defect)
             .Include(rec => rec.TechnicalMaintenance)
             .Include(rec => rec.Inspector)
-            .Where(rec => (rec.Name.Contains(model.Name)) || (model.InspectorId.HasValue && rec.InspectorId == model.InspectorId))
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateIn.Date == model.DateIn.Date) ||
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateIn.Date >= model.DateFrom.Value.Date && rec.DateIn.Date <= model.DateTo.Value.Date) ||
+            (model.InspectorId.HasValue && rec.InspectorId == model.InspectorId))
             .ToList()
             .Select(CreateModel)
             .ToList();

@@ -22,12 +22,11 @@ namespace ServiceStationRestAPI.Controllers
 
         [HttpPost]
         public void CreateReportCarWorkToExcelFile(ReportBindingModel model) => _reportLogic.SaveCarWorkToExcelFile(model);
-        /*
+        
         [HttpPost]
-        public void CreateReportClientsToPdfFile(ReportBindingModel model) => _reportLogic.SaveClientsToPdfFile(model);
+        public void CreateReportCarsToPdfFile(ReportBindingModel model) => _reportLogic.SaveCarsToPdfFile(model);
         
         [HttpGet]
-        public List<ReportClientsViewModel> GetClientsReport(string dateFrom, string dateTo) => _reportLogic.GetClients(new ReportBindingModel { DateFrom = Convert.ToDateTime(dateFrom), DateTo = Convert.ToDateTime(dateTo) });
-        */
+        public List<ReportCarsViewModel> GetCarsReport(string dateFrom, string dateTo) => _reportLogic.GetCars(new ReportBindingModel { DateFrom = Convert.ToDateTime(dateFrom), DateTo = Convert.ToDateTime(dateTo) });
     }
 }

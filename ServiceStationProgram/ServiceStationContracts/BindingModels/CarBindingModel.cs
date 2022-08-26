@@ -16,5 +16,9 @@ namespace ServiceStationContracts.BindingModels
         public int? DefectId { get; set; }
         public int? TechnicalMaintenanceId { get; set; }
         public int? InspectorId { get; set; }
+
+        //для отчета
+        public DateTime? DateFrom { get; set; }
+        public DateTime? DateTo { get; set; }
     }
 }

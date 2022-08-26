@@ -13,7 +13,8 @@ namespace ServiceStationBusinessLogic.OfficePackage.HelperModels
         public string Title { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
+        public List<ReportCarsViewModel> Cars { get; set; }
+
         //public List<ReportCurrenciesViewModel> Currencies { get; set; }
-        //public List<ReportClientsViewModel> Clients { get; set; }
     }
 }

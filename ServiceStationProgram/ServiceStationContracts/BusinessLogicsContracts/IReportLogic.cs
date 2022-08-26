@@ -25,6 +25,8 @@ namespace ServiceStationContracts.BusinessLogicsContracts
         // Получение списка машин за период
         List<ReportCarsViewModel> GetCars(ReportBindingModel model);
 
+        // Сохранение списка машин за период в файл-Pdf
+        void SaveCarsToPdfFile(ReportBindingModel model);
 
         /*
         //Manager
@@ -42,7 +44,6 @@ namespace ServiceStationContracts.BusinessLogicsContracts
         List<ReportCurrenciesViewModel> GetCurrencies(ReportBindingModel model);
 
         void SaveCurrenciesToPdfFile(ReportBindingModel model);
-        void SaveClientsToPdfFile(ReportBindingModel model);
         */
     }    
 }

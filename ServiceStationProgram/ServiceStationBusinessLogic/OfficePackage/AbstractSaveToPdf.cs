@@ -10,8 +10,43 @@ namespace ServiceStationBusinessLogic.OfficePackage
 {
     public abstract class AbstractSaveToPdf
     {
-        /*
-        public void CreateDocManager(PdfInfo info)
+        public void CreatePdfInspector(PdfInfo info)
+        {
+            CreatePdf(info);
+            CreateParagraph(new PdfParagraph
+            {
+                Text = info.Title,
+                Style = "NormalTitle"
+            });
+            CreateParagraph(new PdfParagraph
+            {
+                Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }",
+                Style = "Normal"
+            });
+            CreateTable(new List<string> { "6cm", "3cm", "5cm", "5cm" });
+            CreateRow(new PdfRowParameters
+            {
+                Texts = new List<string> { "Наименование авто", "Дата обращения", "Неисправность", "ТО" },
+                Style = "NormalTitle",
+                ParagraphAlignment = PdfParagraphAlignmentType.Center
+            });
+            foreach (var car in info.Cars)
+            {
+                CreateRow(new PdfRowParameters
+                {
+
+                    Texts = new List<string> { car.CarName,
+                                                car.DateIn.ToShortDateString(),
+                                                car.DefectName,
+                                                car.TechnicalMaintenanceName},
+                    Style = "Normal",
+                    ParagraphAlignment = PdfParagraphAlignmentType.Left
+                });
+            }
+            SavePdf(info);
+        }
+
+        /*public void CreateDocManager(PdfInfo info)
         {
             CreatePdf(info);
             CreateParagraph(new PdfParagraph
@@ -45,61 +80,7 @@ namespace ServiceStationBusinessLogic.OfficePackage
                 });
             }
             SavePdf(info);
-        }
-
-        public void CreateDocClerk(PdfInfo info)
-        {
-            CreatePdf(info);
-            CreateParagraph(new PdfParagraph
-            {
-                Text = info.Title,
-                Style = "NormalTitle"
-            });
-            CreateParagraph(new PdfParagraph
-            {
-                Text = $"с { info.DateFrom.ToShortDateString() } по { info.DateTo.ToShortDateString() }",
-                Style = "Normal"
-            });
-            CreateTable(new List<string> { "5cm", "3cm", "5cm", "4cm"});
-            CreateRow(new PdfRowParameters
-            {
-                Texts = new List<string> { "ФИО", "Дата", "Вклады", "Валюты" },
-                Style = "NormalTitle",
-                ParagraphAlignment = PdfParagraphAlignmentType.Center
-            });
-            foreach (var client in info.Clients)
-            {
-                for(int i = 0; i < client.DepositCurrencies.Count; i++)
-                {
-                    if (i == 0)
-                    {
-                        CreateRow(new PdfRowParameters
-                        {
-
-                            Texts = new List<string> { client.ClientFIO,
-                                                client.DateVisit.ToShortDateString(),
-                                                client.DepositCurrencies[i].Item1.DepositName,
-                                                string.Join(", ", client.DepositCurrencies[i].Item2.Select(cur => cur.CurrencyName).ToList())},
-                            Style = "Normal",
-                            ParagraphAlignment = PdfParagraphAlignmentType.Left
-                        });
-                    }
-                    else
-                    {
-                        CreateRow(new PdfRowParameters
-                        {
-
-                            Texts = new List<string> { String.Empty, String.Empty,
-                                                client.DepositCurrencies[i].Item1.DepositName,
-                                                string.Join(", ", client.DepositCurrencies[i].Item2.Select(cur => cur.CurrencyName).ToList())},
-                            Style = "Normal",
-                            ParagraphAlignment = PdfParagraphAlignmentType.Left
-                        });
-                    }
-                }                             
-            }
-            SavePdf(info);
-        }
+        }*/
 
         /// <summary>/// Создание doc-файла
         /// </summary>
@@ -126,8 +107,7 @@ namespace ServiceStationBusinessLogic.OfficePackage
         /// Сохранение файла
         /// </summary>
         /// <param name="info"></param>
-        protected abstract void SavePdf(PdfInfo info);
-        */
+        protected abstract void SavePdf(PdfInfo info);        
     }
 }
 
