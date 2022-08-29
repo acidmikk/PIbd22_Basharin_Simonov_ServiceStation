@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
+#nullable disable
+
 namespace ServiceStationDatabaseImplement.Migrations
 {
-    public partial class initialcreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -86,7 +88,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Discription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RepairId = table.Column<int>(type: "int", nullable: false),
+                    RepairId = table.Column<int>(type: "int", nullable: true),
                     InspectorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -102,8 +104,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         name: "FK_Defects_Repairs_RepairId",
                         column: x => x.RepairId,
                         principalTable: "Repairs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -114,10 +115,10 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateIn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateOut = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOut = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Discription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DefectId = table.Column<int>(type: "int", nullable: false),
-                    TechnicalMaintenanceId = table.Column<int>(type: "int", nullable: false),
+                    DefectId = table.Column<int>(type: "int", nullable: true),
+                    TechnicalMaintenanceId = table.Column<int>(type: "int", nullable: true),
                     InspectorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -127,20 +128,18 @@ namespace ServiceStationDatabaseImplement.Migrations
                         name: "FK_Cars_Defects_DefectId",
                         column: x => x.DefectId,
                         principalTable: "Defects",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Cars_Inspectors_InspectorId",
                         column: x => x.InspectorId,
                         principalTable: "Inspectors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_TechnicalMaintenances_TechnicalMaintenanceId",
                         column: x => x.TechnicalMaintenanceId,
                         principalTable: "TechnicalMaintenances",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -151,7 +150,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DefectId = table.Column<int>(type: "int", nullable: false),
-                    RepairId = table.Column<int>(type: "int", nullable: false),
+                    RepairId = table.Column<int>(type: "int", nullable: true),
                     MasterId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -168,13 +167,12 @@ namespace ServiceStationDatabaseImplement.Migrations
                         column: x => x.MasterId,
                         principalTable: "Masters",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Spares_Repairs_RepairId",
                         column: x => x.RepairId,
                         principalTable: "Repairs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -184,7 +182,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SparesId = table.Column<int>(type: "int", nullable: false),
+                    SparesId = table.Column<int>(type: "int", nullable: true),
                     TechnicalMaintenanceId = table.Column<int>(type: "int", nullable: false),
                     MasterId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -201,8 +199,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         name: "FK_Works_Spares_SparesId",
                         column: x => x.SparesId,
                         principalTable: "Spares",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Works_TechnicalMaintenances_TechnicalMaintenanceId",
                         column: x => x.TechnicalMaintenanceId,
