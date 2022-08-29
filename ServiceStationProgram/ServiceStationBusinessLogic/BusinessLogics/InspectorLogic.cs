@@ -16,7 +16,7 @@ namespace ServiceStationBusinessLogic.BusinessLogics
         private readonly IInspectorStorage _InspectorStorage;
         private readonly int _emailMaxLength = 50;
         private readonly int _passwordMaxLength = 30;
-        private readonly int _passwordMinLength = 10;
+        private readonly int _passwordMinLength = 6;
         public InspectorLogic(IInspectorStorage InspectorStorage)
         {
             _InspectorStorage = InspectorStorage;
