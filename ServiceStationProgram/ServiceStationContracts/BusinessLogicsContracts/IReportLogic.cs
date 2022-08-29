@@ -10,7 +10,7 @@ namespace ServiceStationContracts.BusinessLogicsContracts
 {
     public interface IReportLogic
     {
-        
+
         //Inspector
 
         // Получение списка работ по выбранным машинам
@@ -27,24 +27,6 @@ namespace ServiceStationContracts.BusinessLogicsContracts
 
         // Сохранение списка машин за период в файл-Pdf
         void SaveCarsToPdfFile(ReportBindingModel model);
-
-        /*
-        //Manager
-
-        // Получение списка вкладов по выбранным кредитным программам
-        List<ReportLoanProgramDepositViewModel> GetLoanProgramDeposit(ReportBindingModel model);
-
-        // Сохранение вкладов по выбранным кредитным программам в файл-Word
-        void SaveLoanProgramDepositToWordFile(ReportBindingModel model);
-
-        // Сохранение вкладов по выбранным кредитным программам в файл-Excel
-        void SaveLoanProgramDepositToExcelFile(ReportBindingModel model);
-
-        // Получение списка валют за период
-        List<ReportCurrenciesViewModel> GetCurrencies(ReportBindingModel model);
-
-        void SaveCurrenciesToPdfFile(ReportBindingModel model);
-        */
-    }    
+    }
 }
 
