@@ -214,7 +214,7 @@ namespace ServiceStationApp.Controllers
         [HttpGet]
         public IActionResult DefectCreate()
         {
-            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
+            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>($"api/inspector/GetInspectorCarList?inspectorId={Program.Inspector.Id}");
             return View();
         }
 
@@ -308,7 +308,7 @@ namespace ServiceStationApp.Controllers
         [HttpGet]
         public IActionResult TechnicalMaintenanceCreate()
         {
-            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>("api/car/GetCarList");
+            ViewBag.Cars = APIInspector.GetRequest<List<CarViewModel>>($"api/inspector/GetInspectorCarList?inspectorId={Program.Inspector.Id}");
             return View();
         }
 

@@ -30,6 +30,7 @@ namespace ServiceStationDatabaseImplement.Implements
             }
             using var context = new ServiceStationDatabase();
             return context.TechnicalMaintenances
+            .Where(rec => (rec.Name.Contains(model.Name)) || (model.InspectorId.HasValue && rec.InspectorId == model.InspectorId))
             .ToList()
             .Select(CreateModel)
             .ToList();
