@@ -36,7 +36,8 @@ namespace ServiceStationDatabaseImplement.Migrations
                     b.Property<DateTime>("DateOut")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DefectId")
+                    b.Property<int?>("DefectId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Discription")
@@ -50,7 +51,8 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TechnicalMaintenanceId")
+                    b.Property<int?>("TechnicalMaintenanceId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -83,7 +85,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RepairId")
+                    b.Property<int?>("RepairId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -185,7 +187,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RepairId")
+                    b.Property<int?>("RepairId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -240,7 +242,7 @@ namespace ServiceStationDatabaseImplement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SparesId")
+                    b.Property<int?>("SparesId")
                         .HasColumnType("int");
 
                     b.Property<int>("TechnicalMaintenanceId")
@@ -294,9 +296,7 @@ namespace ServiceStationDatabaseImplement.Migrations
 
                     b.HasOne("ServiceStationDatabaseImplement.Models.Repair", "Repair")
                         .WithMany()
-                        .HasForeignKey("RepairId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RepairId");
 
                     b.Navigation("Inspector");
 
@@ -330,9 +330,7 @@ namespace ServiceStationDatabaseImplement.Migrations
 
                     b.HasOne("ServiceStationDatabaseImplement.Models.Repair", "Repair")
                         .WithMany("Spares")
-                        .HasForeignKey("RepairId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RepairId");
 
                     b.Navigation("Defect");
 
@@ -362,9 +360,7 @@ namespace ServiceStationDatabaseImplement.Migrations
 
                     b.HasOne("ServiceStationDatabaseImplement.Models.Spares", "Spares")
                         .WithMany("Works")
-                        .HasForeignKey("SparesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SparesId");
 
                     b.HasOne("ServiceStationDatabaseImplement.Models.TechnicalMaintenance", "TechnicalMaintenance")
                         .WithMany()

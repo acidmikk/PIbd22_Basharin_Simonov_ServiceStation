@@ -58,16 +58,15 @@ namespace ServiceStationDatabaseImplement.Implements
             using var transaction = context.Database.BeginTransaction();
             try
             {
-                Spares spares = new Spares()
+/*                Spares spares = new Spares()
                 {
                     Name = model.Name,
-                    DefectId = (int)model.DefectId,
-                    MasterId = (int)model.MasterId,
-                    RepairId = (int)model.RepairId
-                };
-                context.Spares.Add(spares);
+                    //DefectId = (int)model.DefectId,
+                    MasterId = (int)model.MasterId
+                    //RepairId = (int)model.RepairId
+                };*/
+                context.Spares.Add(CreateModel(model, new Spares(), context));
                 context.SaveChanges();
-                CreateModel(model, spares, context);
                 transaction.Commit();
             }
             catch
@@ -115,8 +114,6 @@ namespace ServiceStationDatabaseImplement.Implements
         {
             spares.Name = model.Name;
             spares.MasterId = (int)model.MasterId;
-            spares.RepairId = (int)model.RepairId;
-            spares.DefectId = (int)model.DefectId;
             return spares;
         }
         private static SparesViewModel CreateModel(Spares spares)

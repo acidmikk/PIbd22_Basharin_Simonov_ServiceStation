@@ -12,8 +12,8 @@ namespace ServiceStationDatabaseImplement.Models
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public int SparesId { get; set; }
-        public virtual Spares Spares { get; set; }
+        public int? SparesId { get; set; }
+        public virtual Spares? Spares { get; set; }
         public int TechnicalMaintenanceId { get; set; }
         public virtual TechnicalMaintenance TechnicalMaintenance { get; set; }
         public int MasterId { get; set; }

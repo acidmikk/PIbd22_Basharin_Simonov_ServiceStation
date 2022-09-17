@@ -127,8 +127,8 @@ namespace ServiceStationDatabaseImplement.Implements
             return new CarViewModel
             {
                 Id = car.Id,
-                DefectId = car.DefectId,
-                TechnicalMaintenanceId = car.TechnicalMaintenanceId,
+                DefectId = (int)car.DefectId,
+                TechnicalMaintenanceId = (int)car.TechnicalMaintenanceId,
                 Name = car.Name,
                 DateIn = car.DateIn,
                 DateOut = car.DateOut,

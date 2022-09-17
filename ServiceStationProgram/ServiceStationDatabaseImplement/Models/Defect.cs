@@ -15,7 +15,7 @@ namespace ServiceStationDatabaseImplement.Models
         public string Name { get; set; }
         [Required]
         public string Discription { get; set; }
-        public int RepairId { get; set; }
+        public int? RepairId { get; set; }
         public virtual Repair Repair { get; set; }
         [ForeignKey("DefectId")]
         public virtual List<Spares> Spares { get; set; }

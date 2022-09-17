@@ -17,8 +17,8 @@ namespace ServiceStationDatabaseImplement.Models
         public virtual Defect Defect { get; set; }
         [ForeignKey("SparesId")]
         public virtual List<Work> Works { get; set; }
-        public int RepairId { get; set; }
-        public virtual Repair Repair { get; set; }
+        public int? RepairId { get; set; }
+        public virtual Repair? Repair { get; set; }
         public int MasterId { get; set; }
         public virtual Master Master { get; set; }
     }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ServiceStationViewMaster"
         mc:Ignorable="d"
         FontFamily="Rubik"
-Title="Валюты" Height="450" Width="800" Loaded="Window_Loaded">
+Title="Ремонты" Height="450" Width="800" Loaded="Window_Loaded">
     <Window.Resources>
         <Style x:Key="BStyle" TargetType="{x:Type Button}">
             <Setter Property="FontFamily" Value="Rubik" />
@@ -29,8 +29,7 @@ Title="Валюты" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <DataGrid AutoGenerateColumns="False" Margin="0,0,145,0" Name="dataGrid" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding Path=CurrencyName}" Width="150" />
-                <DataGridTextColumn Header="Запчасти" Binding="{Binding Path=PrettyDeposits}" Width="*"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Path=RepairName}" Width="300" />
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="buttonAdd" Content="Добавить" HorizontalAlignment="Left" Margin="685,54,0,0" VerticalAlignment="Top" Width="80" Height="40" RenderTransformOrigin="0.562,2.126" Click="buttonAdd_Click" Style="{DynamicResource BStyle}"/>

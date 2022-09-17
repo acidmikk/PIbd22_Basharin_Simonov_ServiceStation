@@ -18,9 +18,9 @@ namespace ServiceStationDatabaseImplement.Models
         public DateTime DateOut { get; set; }
         [Required]
         public string Discription { get; set; }
-        public int DefectId { get; set; }
+        public int? DefectId { get; set; }
         public virtual Defect Defect { get; set; }
-        public int TechnicalMaintenanceId { get; set; }
+        public int? TechnicalMaintenanceId { get; set; }
         public virtual TechnicalMaintenance TechnicalMaintenance { get; set; }
         public int InspectorId { get; set; }
         public virtual Inspector Inspector { get; set; }

@@ -27,7 +27,8 @@ namespace ServiceStationViewMaster
 
         private void menuItemSpares_Click(object sender, RoutedEventArgs e)
         {
-
+            var form = App.Container.Resolve<SparesWindow>();
+            form.ShowDialog();
         }
 
         private void menuItemRepair_Click(object sender, RoutedEventArgs e)
@@ -38,7 +39,8 @@ namespace ServiceStationViewMaster
 
         private void menuItemWork_Click(object sender, RoutedEventArgs e)
         {
-
+            var form = App.Container.Resolve<WorksWindow>();
+            form.ShowDialog();
         }
 
         private void menuItemGetList_Click(object sender, RoutedEventArgs e)
