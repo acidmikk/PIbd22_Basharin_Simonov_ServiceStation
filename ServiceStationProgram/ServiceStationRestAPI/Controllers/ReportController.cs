@@ -19,13 +19,10 @@ namespace ServiceStationRestAPI.Controllers
         
         [HttpPost]
         public void CreateReportCarWorkToWordFile(ReportBindingModel model) => _reportLogic.SaveCarWorkToWordFile(model);
-
         [HttpPost]
         public void CreateReportCarWorkToExcelFile(ReportBindingModel model) => _reportLogic.SaveCarWorkToExcelFile(model);
-        
         [HttpPost]
         public void CreateReportCarsToPdfFile(ReportBindingModel model) => _reportLogic.SaveCarsToPdfFile(model);
-        
         [HttpGet]
         public List<ReportCarsViewModel> GetCarsReport(string dateFrom, string dateTo) => _reportLogic.GetCars(new ReportBindingModel { DateFrom = Convert.ToDateTime(dateFrom), DateTo = Convert.ToDateTime(dateTo) });
     }
